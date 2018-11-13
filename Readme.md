@@ -1,7 +1,7 @@
 # Личный проект «Пиксель хантер» [![Build status][travis-image]][travis-url]
 
 * Студент: [Ольга Ефимова](https://up.htmlacademy.ru/ecmascript/7/user/302633).
-* Наставник: `Неизвестно`.
+* Наставник: [Артем Черкасов](https://up.htmlacademy.ru/ecmascript/7/user/530727).
 
 ---
 
