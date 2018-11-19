@@ -38,9 +38,13 @@ const rulesButton = screen.querySelector(`.rules__button`);
 const rulesForm = screen.querySelector(`.rules__form`);
 const backButton = screen.querySelector(`.back`);
 
-rulesInput.addEventListener(`input`, () => rulesInput.value ?
-  rulesButton.disabled = false
-  : rulesButton.disabled = true);
+rulesInput.addEventListener(`input`, () => {
+  if (rulesInput.value) {
+    rulesButton.disabled = false;
+  } else {
+    rulesButton.disabled = true;
+  }
+});
 
 rulesForm.addEventListener(`submit`, () => changeScreen(firstGameScreen));
 backButton.addEventListener(`click`, () => changeScreen(greetingScreen));

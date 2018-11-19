@@ -71,7 +71,9 @@ const isAllAnsweres = () => {
 };
 
 const onAnswerChange = () => {
-  return isAllAnsweres(optionsNumber) ? changeScreen(secondGameScreen) : null;
+  if (isAllAnsweres(optionsNumber)) {
+    changeScreen(secondGameScreen);
+  }
 };
 
 answeres.forEach((answer) => answer.addEventListener(`change`, onAnswerChange));
