@@ -10,7 +10,24 @@ const TimeLimit = {
 const ANSWERES_LIMIT = 10;
 
 const calculateScore = (answeres, lives) => {
-  const rightAnsweres = answeres.filter((answer) => answer.isRight);
+  if (lives < 0) {
+    throw new Error(`Lives should not be negative value`);
+  }
+
+  if (!Array.isArray(answeres)) {
+    throw new Error(`First parameter should be array`);
+  }
+
+  if (typeof lives !== `number`) {
+    throw new Error(`Second parameter should be number`);
+  }
+
+  const rightAnsweres = answeres.filter((answer) => {
+    if (answer.time < 0) {
+      throw new Error(`Answer time should not be negative value`);
+    }
+    return answer.isRight;
+  });
 
   if (rightAnsweres.length < ANSWERES_LIMIT) {
     return -1;

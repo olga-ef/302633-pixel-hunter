@@ -7,10 +7,11 @@ const Result = {
   THIRD: [{isRight: true, time: 9}, {isRight: true, time: 9}, {isRight: true, time: 9}, {isRight: true, time: 9}, {isRight: true, time: 9}, {isRight: true, time: 9}, {isRight: true, time: 9}, {isRight: true, time: 9}, {isRight: true, time: 9}, {isRight: true, time: 9}],
   FORTH: [{isRight: true, time: 22}, {isRight: true, time: 22}, {isRight: true, time: 22}, {isRight: true, time: 22}, {isRight: true, time: 22}, {isRight: true, time: 22}, {isRight: true, time: 22}, {isRight: true, time: 22}, {isRight: true, time: 22}, {isRight: true, time: 22}],
   FIFTH: [{isRight: true, time: 5}, {isRight: true, time: 5}, {isRight: true, time: 5}, {isRight: true, time: 5}, {isRight: true, time: 5}, {isRight: true, time: 12}, {isRight: true, time: 12}, {isRight: true, time: 12}, {isRight: true, time: 22}, {isRight: true, time: 22}],
-  SIXTH: [{isRight: true, time: 5}, {isRight: true, time: 5}, {isRight: true, time: 25}, {isRight: true, time: 25}, {isRight: true, time: 25}, {isRight: true, time: 25}, {isRight: true, time: 18}, {isRight: true, time: 18}, {isRight: true, time: 18}, {isRight: true, time: 18}]
+  SIXTH: [{isRight: true, time: 5}, {isRight: true, time: 5}, {isRight: true, time: 25}, {isRight: true, time: 25}, {isRight: true, time: 25}, {isRight: true, time: 25}, {isRight: true, time: 18}, {isRight: true, time: 18}, {isRight: true, time: 18}, {isRight: true, time: 18}],
+  SEVENTH: [{isRight: true, time: -5}, {isRight: true, time: 5}, {isRight: true, time: 25}, {isRight: true, time: 25}, {isRight: true, time: 25}, {isRight: true, time: 25}, {isRight: true, time: 18}, {isRight: true, time: 18}, {isRight: true, time: 18}, {isRight: true, time: 18}]
 };
 
-describe(`Counting final score`, () => {
+describe(`Check calculating score`, () => {
   it(`should calculate score correctly`, () => {
     // Если игрок ответил на все вопросы и не быстро, и не медленно, и у него остались все жизни, то функция должна вернуть 1150 очков;
     assert.equal(calculateScore(Result.SECOND, 3), 1150);
@@ -24,13 +25,23 @@ describe(`Counting final score`, () => {
     assert.equal(calculateScore(Result.SIXTH, 0), 900);
   });
 
-  it(`should return -1 when less 10 answeres is right`, () => {
+  it(`should return -1 when less then 10 answeres is right`, () => {
     assert.equal(calculateScore(Result.FIRST, 3), -1);
   });
 
-// количество жизней не может быть отрицательным
-// время не может быть отрицательным
-// первый параметр должен быть объектом, второй числом
+  it(`should not allow set negative values in answer time and level`, () => {
+    assert.throws(() => calculateScore(Result.SEVENTH, 2), /Answer time should not be negative value/);
+    assert.throws(() => calculateScore(Result.FIRST, -2), /Lives should not be negative value/);
+  });
+
+  it(`First parameter should be array`, () => {
+    assert.throws(() => calculateScore({}, 2), /First parameter should be array/);
+    assert.throws(() => calculateScore(`abc`, 2), /First parameter should be array/);
+  });
+
+  it(`Second parameter should be number`, () => {
+    assert.throws(() => calculateScore(Result.FIRST, []), /Second parameter should be number/);
+  });
 });
 
 
