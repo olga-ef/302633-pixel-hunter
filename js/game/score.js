@@ -26,7 +26,7 @@ const calculateScore = (answers, lives) => {
     if (answer.time < 0) {
       throw new Error(`Answer time should not be negative value`);
     }
-    return answer.isRight;
+    return answer.isRight && answer.time >= 0;
   });
 
   if (rightAnswers.length < ANSWERS_LIMIT) {
