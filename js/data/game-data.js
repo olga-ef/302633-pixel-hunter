@@ -23,64 +23,64 @@ const photos = [
 const LEVELS = [
   {
     question: `Угадайте для каждого изображения фото или рисунок?`,
-    options: new Set([{image: paintings[0], type: `paint`, key: 1}, {image: photos[0], type: `photo`, key: 2}]),
+    options: [{image: paintings[0], type: `paint`, key: 1}, {image: photos[0], type: `photo`, key: 2}],
     type: `game-1`
   },
   {
     question: `Угадай, фото или рисунок?`,
-    options: new Set([{image: photos[1], type: `photo`, key: 1}]),
+    options: [{image: photos[1], type: `photo`, key: 1}],
     type: `game-2`
   },
   {
     question: `Найдите рисунок среди изображений`,
-    options: new Set([
+    options: [
       {image: photos[2], type: false, key: 1},
       {image: paintings[2], type: true, key: 2},
       {image: photos[0], type: false, key: 3}
-    ]),
+    ],
     type: `game-3`
   },
   {
     question: `Найдите фотографию среди изображений`,
-    options: new Set([
+    options: [
       {image: paintings[1], type: false, key: 1},
       {image: paintings[2], type: false, key: 2},
       {image: photos[0], type: true, key: 3}
-    ]),
+    ],
     type: `game-3`
   },
   {
     question: `Угадай, фото или рисунок?`,
-    options: new Set([{image: paintings[1], type: `paint`, key: 1}]),
+    options: [{image: paintings[1], type: `paint`, key: 1}],
     type: `game-2`
   },
   {
     question: `Угадай, фото или рисунок?`,
-    options: new Set([{image: photos[0], type: `photo`, key: 1}]),
+    options: [{image: photos[0], type: `photo`, key: 1}],
     type: `game-2`
   },
   {
     question: `Угадайте для каждого изображения фото или рисунок?`,
-    options: new Set([{image: paintings[1], type: `paint`, key: 1}, {image: photos[2], type: `photo`, key: 2}]),
+    options: [{image: paintings[1], type: `paint`, key: 1}, {image: photos[2], type: `photo`, key: 2}],
     type: `game-1`
   },
   {
     question: `Угадайте для каждого изображения фото или рисунок?`,
-    options: new Set([{image: paintings[0], type: `paint`, key: 1}, {image: photos[1], type: `photo`, key: 2}]),
+    options: [{image: paintings[0], type: `paint`, key: 1}, {image: photos[1], type: `photo`, key: 2}],
     type: `game-1`
   },
   {
     question: `Угадайте для каждого изображения фото или рисунок?`,
-    options: new Set([{image: photos[1], type: `photo`, key: 1}, {image: paintings[1], type: `paint`, key: 2}]),
+    options: [{image: photos[1], type: `photo`, key: 1}, {image: paintings[1], type: `paint`, key: 2}],
     type: `game-1`
   },
   {
     question: `Найдите рисунок среди изображений`,
-    options: new Set([
+    options: [
       {image: photos[1], type: false, key: 1},
       {image: paintings[0], type: true, key: 2},
       {image: photos[0], type: false, key: 3}
-    ]),
+    ],
     type: `game-3`
   }
 ];

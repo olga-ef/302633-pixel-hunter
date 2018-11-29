@@ -14,20 +14,18 @@ const startGame = () => {
   gameState = Object.assign({}, INITIAL_STATE);
 
   const gameContainerElement = render();
-  const headerElement = render();
-  const levelElement = render();
-
-  gameContainerElement.appendChild(headerElement);
-  gameContainerElement.appendChild(levelElement);
-
 
   const getLevel = () => LEVELS[gameState.level];
 
   const updateGame = (state) => {
-    headerElement.innerHTML = ``;
-    headerElement.appendChild(renderHeader(HEADER_FULL, state));
     const level = getLevel();
-    levelElement.innerHTML = renderLevel(state, level);
+
+    const headerElement = renderHeader(HEADER_FULL, state);
+    const levelElement = renderLevel(state, level);
+
+    gameContainerElement.innerHTML = ``;
+    gameContainerElement.appendChild(headerElement);
+    gameContainerElement.appendChild(levelElement);
 
     const options = levelElement.querySelectorAll(`.game__option`);
     const form = levelElement.querySelector(`.game__content`);

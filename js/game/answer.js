@@ -11,7 +11,7 @@ const checkAnswer = (level, answers) => {
   const answerStatus = answers.every((answer) => {
     const key = answer.dataset.key;
     const option = getOptionByKey(level.options, key);
-    const result = answer.value ? option.type === answer.value : option.type;
+    const result = level.type === `game-3` ? option.type : option.type === answer.value;
     return result;
   });
   return answerStatus;

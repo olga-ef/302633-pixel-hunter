@@ -5,6 +5,18 @@ const Point = {
 };
 const ANSWERS_LIMIT = 7;
 
+function getFinalScore(rightAnswers, fastAnswers, slowAnswers, lives) {
+
+  if (rightAnswers.length < ANSWERS_LIMIT) {
+    return -1;
+  }
+
+  const finalScore = rightAnswers.length * Point.BASE + fastAnswers.length * Point.BONUS
+      + slowAnswers.length * Point.PENALTY + lives * Point.BONUS;
+
+  return finalScore;
+};
+
 const calculateScore = (answers, lives) => {
   if (lives < 0) {
     throw new Error(`Lives should not be negative value`);
@@ -23,10 +35,7 @@ const calculateScore = (answers, lives) => {
   const fastAnswers = rightAnswers.filter((answer) => answer.status === `fast`);
   const slowAnswers = rightAnswers.filter((answer) => answer.status === `slow`);
 
-  const finalScore = (rightAnswers.length < ANSWERS_LIMIT) ?
-    -1 :
-    rightAnswers.length * Point.BASE + fastAnswers.length * Point.BONUS
-    + slowAnswers.length * Point.PENALTY + lives * Point.BONUS;
+  const finalScore = getFinalScore(rightAnswers, fastAnswers, slowAnswers, lives);
 
   return {
     correct: rightAnswers.length,
