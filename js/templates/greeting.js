@@ -23,9 +23,13 @@ const template = `
     </button>
   </section>`;
 
-  screen = render(template);
+const renderGreeting = () => {
+  const greeting = render(template);
 
-  const nextButton = screen.querySelector(`.greeting__continue`);
-  nextButton.addEventListener(`click`, () => changeScreen(renderRules));
+  const nextButton = greeting.querySelector(`.greeting__continue`);
+  nextButton.addEventListener(`click`, () => changeScreen(renderRules()));
 
-export default screen;
+  return greeting;
+};
+
+export default renderGreeting;

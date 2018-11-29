@@ -1,5 +1,3 @@
-import showGameOver from '../templates/result';
-
 const LAST_LEVEL = 10;
 
 export const canContinue = (state) => state.level < LAST_LEVEL;

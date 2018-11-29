@@ -4,6 +4,7 @@ const getOptionByKey = (options, key) => {
       return option;
     }
   }
+  return null;
 };
 
 const checkAnswer = (level, answers) => {
@@ -17,7 +18,7 @@ const checkAnswer = (level, answers) => {
 };
 
 export const getAnswers = (target, parent) => {
-  const answers =  Array.from(parent.querySelectorAll(`.game__option input`));
+  const answers = Array.from(parent.querySelectorAll(`.game__option input`));
   if (answers.length === 0) {
     return [target.parentElement];
   }
@@ -31,7 +32,7 @@ export const isAllAnswers = (answers, optionsNumber) => {
 };
 
 export const saveAnswer = (level, answers, state) => {
-  const newAnswer= checkAnswer(level, answers) ?
+  const newAnswer = checkAnswer(level, answers) ?
     {status: `correct`, time: 15} :
     {status: `wrong`, time: 15};
 

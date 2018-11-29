@@ -1,5 +1,5 @@
 import {render} from '../util';
-import backButton from './back-button';
+import {HEADER_SHORT, renderHeader} from './header';
 import startGame from '../game/start-game';
 
 const template = `
@@ -21,25 +21,24 @@ const template = `
     </section>`;
 
 const renderRules = () => {
-  const container = render();
-  const header = document.createElement(`header`);
-  header.classList.add(`header`);
-  header.appendChild(renderButton());
+  const containerElement = render();
+  const headerElement = renderHeader(HEADER_SHORT);
+  const contentElement = render(template);
 
-  const content = render(template);
+  containerElement.appendChild(headerElement);
+  containerElement.appendChild(contentElement);
 
-  container.appendChild(header);
-  container.appendChild(content);
-
-  const nextButton = container.querySelector(`.rules__button`);
-  const rulesForm = container.querySelector(`.rules__form`);
-  const rulesInput = container.querySelector(`.rules__input`);
-  const rulesButton = container.querySelector(`.rules__button`);
+  const rulesForm = contentElement.querySelector(`.rules__form`);
+  const rulesInput = contentElement.querySelector(`.rules__input`);
+  const rulesButton = contentElement.querySelector(`.rules__button`);
 
   rulesInput.addEventListener(`input`, () => {
     rulesButton.disabled = rulesInput.value ? false : true;
   });
+
   rulesForm.addEventListener(`submit`, () => startGame());
+
+  return containerElement;
 };
 
 export default renderRules;

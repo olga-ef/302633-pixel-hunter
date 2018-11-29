@@ -1,7 +1,7 @@
 import {INITIAL_STATE} from '../data/initial-state';
 import LEVELS from '../data/game-data';
 import {render, changeScreen} from '../util';
-import renderHeader from '../templates/header';
+import {renderHeader, HEADER_FULL} from '../templates/header';
 import renderLevel from '../templates/game-screen';
 import {decreaseLives} from './lives';
 import {changeLevel, canContinue} from './level';
@@ -17,16 +17,15 @@ const startGame = () => {
   const headerElement = render();
   const levelElement = render();
 
-  // init game content
-
   gameContainerElement.appendChild(headerElement);
   gameContainerElement.appendChild(levelElement);
 
-  // get current level
+
   const getLevel = () => LEVELS[gameState.level];
 
   const updateGame = (state) => {
-    headerElement.innerHTML = renderHeader(state);
+    headerElement.innerHTML = ``;
+    headerElement.appendChild(renderHeader(HEADER_FULL, state));
     const level = getLevel();
     levelElement.innerHTML = renderLevel(state, level);
 

@@ -1,4 +1,5 @@
 import showGameOver from '../templates/result';
+
 const canContinue = (state) => state.lives !== 0;
 
 export const decreaseLives = (state) => {
