@@ -5,7 +5,7 @@ const Point = {
 };
 const ANSWERS_LIMIT = 7;
 
-function getFinalScore(rightAnswers, fastAnswers, slowAnswers, lives) {
+const getFinalScore = (rightAnswers, fastAnswers, slowAnswers, lives) => {
 
   if (rightAnswers.length < ANSWERS_LIMIT) {
     return -1;

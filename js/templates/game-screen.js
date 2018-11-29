@@ -8,7 +8,7 @@ const renderLevel = (state, level) => {
     <p class="game__task">${level.question}</p>
     ${getOptions(level)}
     ${getStats(state)}
-  </section>`
+  </section>`;
 
   const levelElement = render();
   levelElement.innerHTML = template;
