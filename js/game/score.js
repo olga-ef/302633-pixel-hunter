@@ -23,24 +23,23 @@ const calculateScore = (answers, lives) => {
   }
 
   const rightAnswers = answers.filter((answer) => {
-    if (answer.time < 0) {
-      throw new Error(`Answer time should not be negative value`);
-    }
-    return answer.isRight && answer.time >= 0;
+    return answer.status !== `wrong` && answer.time >= 0;
   });
 
-  if (rightAnswers.length < ANSWERS_LIMIT) {
-    return -1;
-  }
+  const fastAnswers = rightAnswers.filter((answer) => answer.status === `fast`);
+  const slowAnswers = rightAnswers.filter((answer) => answer.time === `slow`);
 
-  const fastAnswers = rightAnswers.filter((answer) => answer.time < TimeLimit.MIN);
-  const slowAnswers = rightAnswers.filter((answer) => answer.time > TimeLimit.MAX);
-  const score = rightAnswers.length * Point.BASE
-    + fastAnswers.length * Point.BONUS
-    + slowAnswers.length * Point.PENALTY
-    + lives * Point.BONUS;
+  const finalScore = (rightAnswers.length < ANSWERS_LIMIT) ?
+    -1 :
+    rightAnswers.length * Point.BASE + fastAnswers.length * Point.BONUS
+    + slowAnswers.length * Point.PENALTY + lives * Point.BONUS;
 
-  return score;
+  return {
+    correct: rightAnswers.length,
+    fast: fastAnswers.length,
+    slow: slowAnswers.length,
+    finalScore
+  };
 };
 
 export default calculateScore;

@@ -1,5 +1,5 @@
 import {render, changeScreen} from '../util';
-import rulesScreen from './rules-screen';
+import renderRules from './rules';
 
 const template = `
   <section class="greeting central--blur">
@@ -23,9 +23,9 @@ const template = `
     </button>
   </section>`;
 
-const screen = render(template);
-const nextButton = screen.querySelector(`.greeting__continue`);
+  screen = render(template);
 
-nextButton.addEventListener(`click`, () => changeScreen(rulesScreen));
+  const nextButton = screen.querySelector(`.greeting__continue`);
+  nextButton.addEventListener(`click`, () => changeScreen(renderRules));
 
 export default screen;
