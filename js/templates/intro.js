@@ -1,5 +1,5 @@
 import {render, changeScreen} from '../util';
-import greetingScreen from './greeting-screen';
+import renderGreeting from './greeting';
 
 const template = `
   <section class="intro">
@@ -7,10 +7,13 @@ const template = `
     <p class="intro__motto"><sup>*</sup> Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.</p>
   </section>`;
 
-const screen = render(template);
+const renderIntro = () => {
+  const intro = render(template);
 
-const nextButton = screen.querySelector(`.intro__asterisk`);
+  const nextButton = intro.querySelector(`.intro__asterisk`);
+  nextButton.addEventListener(`click`, () => changeScreen(renderGreeting()));
 
-nextButton.addEventListener(`click`, () => changeScreen(greetingScreen));
+  return intro;
+};
 
-export default screen;
+export default renderIntro;
