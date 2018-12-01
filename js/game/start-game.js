@@ -9,16 +9,11 @@ import {getAnswers, isAllAnswers, saveAnswer} from './answer';
 import showGameOver from '../templates/result';
 
 let gameState;
+const getLevel = (state) => LEVELS[state.level];
+const gameContainerElement = render();
 
-const startGame = () => {
-  gameState = Object.assign({}, INITIAL_STATE);
-
-  const gameContainerElement = render();
-
-  const getLevel = () => LEVELS[gameState.level];
-
-  const updateGame = (state) => {
-    const level = getLevel();
+const updateGame = (state) => {
+    const level = getLevel(state);
 
     const headerElement = renderHeader(HEADER_FULL, state);
     const levelElement = renderLevel(state, level);
@@ -48,6 +43,9 @@ const startGame = () => {
       }
     });
   };
+
+const startGame = () => {
+  gameState = Object.assign({}, INITIAL_STATE);
 
   updateGame(gameState);
   changeScreen(gameContainerElement);
