@@ -1,9 +1,12 @@
-import {render} from '../util';
-import {HEADER_SHORT, renderHeader} from './header';
-import startGame from '../game/start-game';
+import AbstractView from './abstract-view';
 
-const template = `
-    <section class="rules">
+class RulesView extends AbstractView {
+  constructor() {
+    super();
+  }
+
+  get template() {
+    return `<section class="rules">
       <h2 class="rules__title">Правила</h2>
       <ul class="rules__description">
         <li>Угадай 10 раз для каждого изображения фото
@@ -19,26 +22,25 @@ const template = `
         <button class="rules__button  continue" type="submit" disabled>Go!</button>
       </form>
     </section>`;
+  }
 
-const renderRules = () => {
-  const containerElement = render();
-  const headerElement = renderHeader(HEADER_SHORT);
-  const contentElement = render(template);
+  onInput() {
+  }
 
-  containerElement.appendChild(headerElement);
-  containerElement.appendChild(contentElement);
+  onSubmit() {
+  }
 
-  const rulesForm = contentElement.querySelector(`.rules__form`);
-  const rulesInput = contentElement.querySelector(`.rules__input`);
-  const rulesButton = contentElement.querySelector(`.rules__button`);
+  bind() {
+    const rulesForm = this.element.querySelector(`.rules__form`);
+    const rulesInput = this.element.querySelector(`.rules__input`);
+    const rulesButton = this.element.querySelector(`.rules__button`);
 
-  rulesInput.addEventListener(`input`, () => {
-    rulesButton.disabled = rulesInput.value ? false : true;
-  });
+    rulesInput.addEventListener(`input`, () => this.onInput(rulesButton, rulesInput));
+    rulesForm.addEventListener(`submit`, (e) => {
+      e.preventDefault();
+      this.onSubmit();
+    });
+  }
+}
 
-  rulesForm.addEventListener(`submit`, () => startGame());
-
-  return containerElement;
-};
-
-export default renderRules;
+export default RulesView;

@@ -1,5 +1,3 @@
-import renderIntro from './templates/intro';
-import {changeScreen} from './util';
+import renderInto from './screens/intro';
 
-changeScreen(renderIntro());
-
+renderInto();

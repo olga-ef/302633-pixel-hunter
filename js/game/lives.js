@@ -1,4 +1,4 @@
-import showGameOver from '../templates/result';
+import renderResult from '../screens/result';
 
 const canContinue = (state) => state.lives !== 0;
 
@@ -10,7 +10,7 @@ export const decreaseLives = (state) => {
   --newState.lives;
 
   if (!canContinue(newState)) {
-    showGameOver(newState);
+    renderResult(newState);
   }
   return newState;
 };

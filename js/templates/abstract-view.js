@@ -1,15 +1,15 @@
 class AbstractView {
-  constructor () {
+  constructor() {
     if (new.target === AbstractView) {
       throw new Error(`Can't instantiate AbstractView, only concrete one`);
     }
   }
 
-  get template () {
-    trow new Error(`Template is required`);
+  get template() {
+    throw new Error(`Template is required`);
   }
 
-  get element () {
+  get element() {
     if (this._element) {
       return this._element;
     }
@@ -20,13 +20,15 @@ class AbstractView {
     return this._element;
   }
 
-  render () {
+  render() {
     const container = document.createElement(`div`);
-    container.innerHTML = this.template;
+    container.innerHTML = this.template.trim();
     return container;
   }
 
-  bind (element) {
+  bind() {
 
   }
-};
+}
+
+export default AbstractView;

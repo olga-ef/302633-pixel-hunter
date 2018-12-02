@@ -1,6 +1,6 @@
 import {assert} from 'chai';
 import {decreaseTime} from './time.js';
-import {INITIAL_STATE} from '../data/initial-state.js';
+import {INITIAL_STATE} from '../data/config.js';
 
 describe(`Check live decreasing`, () => {
   it(`Should decrease time by 1`, () => {

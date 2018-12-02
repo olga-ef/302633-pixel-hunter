@@ -12,7 +12,7 @@ export const render = (html = ``) => {
 
 const mainElement = document.querySelector(`#main`);
 
-export const changeScreen = (screen) => {
+export const changeScreen = (...elements) => {
   mainElement.innerHTML = ``;
-  mainElement.appendChild(screen);
+  elements.forEach((element) => mainElement.appendChild(element));
 };

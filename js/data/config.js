@@ -5,4 +5,5 @@ export const INITIAL_STATE = {
   answers: []
 };
 
-
+export const HEADER_SHORT = `short`;
+export const HEADER_FULL = `full`;
