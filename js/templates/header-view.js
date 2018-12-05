@@ -9,15 +9,9 @@ class HeaderView extends AbstractView {
   }
 
   get template() {
-    if (this.type === HEADER_FULL) {
-      return `<header class="header">
-        ${this.addBackButton()}
-        ${this.addTimer(this.state.time)}
-        ${this.addLives(this.state.lives)}
-      </header>`;
-    }
     return `<header class="header">
       ${this.addBackButton()}
+      ${this.type === HEADER_FULL ? this.addTimer(this.state.time) + this.addLives(this.state.lives) : ``}
     </header>`;
   }
 

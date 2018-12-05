@@ -7,3 +7,9 @@ export const INITIAL_STATE = {
 
 export const HEADER_SHORT = `short`;
 export const HEADER_FULL = `full`;
+
+export const Point = {
+  BASE: 100,
+  BONUS: 50,
+  PENALTY: -50
+};

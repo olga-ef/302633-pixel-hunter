@@ -1,13 +1,18 @@
 import {changeScreen} from '../util';
 import ResultView from '../templates/result-view';
+import HeaderView from '../templates/header-view';
+import greeting from './greeting';
 import {HEADER_SHORT} from '../data/config';
 import calculateScore from '../game/score';
-import renderHeader from './header';
 
 export default (state) => {
   const score = calculateScore(state.answers, state.lives);
-  const result = new ResultView(state, score);
-  const header = renderHeader(HEADER_SHORT);
+  const header = new HeaderView(HEADER_SHORT);
+  const result = new ResultView(state, score, header);
 
-  changeScreen(header.element, result.element);
+  header.onClick = () => {
+    greeting();
+  };
+
+  changeScreen(result.element);
 };

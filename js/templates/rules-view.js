@@ -1,12 +1,14 @@
 import AbstractView from './abstract-view';
 
 class RulesView extends AbstractView {
-  constructor() {
+  constructor(header) {
     super();
+    this.header = header.element;
   }
 
   get template() {
-    return `<section class="rules">
+    return `
+    <section class="rules">
       <h2 class="rules__title">Правила</h2>
       <ul class="rules__description">
         <li>Угадай 10 раз для каждого изображения фото
@@ -24,10 +26,16 @@ class RulesView extends AbstractView {
     </section>`;
   }
 
-  onInput() {
+  afterRender() {
+    this.element.insertAdjacentElement(`afterbegin`, this.header);
+  }
+
+  onInput(btn, input) {
+    btn.disabled = !input.value;
   }
 
   onSubmit() {
+
   }
 
   bind() {

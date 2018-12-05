@@ -1,6 +1,6 @@
-import {changeScreen, render} from '../util';
-import renderHeader from './header';
+import {changeScreen} from '../util';
 import greeting from './greeting';
+import HeaderView from '../templates/header-view';
 import {INITIAL_STATE, HEADER_FULL} from '../data/config';
 import LEVELS from '../data/game-data';
 import LevelView from '../templates/level-view';
@@ -12,20 +12,12 @@ import renderResult from './result';
 let gameState;
 
 const getLevel = (state) => LEVELS[state.level];
-const gameContainerElement = render();
-
-const addLevel = (headerElement, levelElement) => {
-  gameContainerElement.innerHTML = ``;
-  gameContainerElement.appendChild(headerElement);
-  gameContainerElement.appendChild(levelElement);
-};
 
 const updateGame = (state) => {
   const level = getLevel(state);
 
-  const gameHeader = renderHeader(HEADER_FULL, state);
-  const gameContent = new LevelView(state, level);
-  addLevel(gameHeader.element, gameContent.element);
+  const gameHeader = new HeaderView(HEADER_FULL, state);
+  const gameContent = new LevelView(state, level, gameHeader);
 
   const options = gameContent.element.querySelectorAll(`.game__option`);
 
@@ -35,7 +27,7 @@ const updateGame = (state) => {
 
   gameContent.onAnswer = (target) => {
     const answers = getAnswers(target, gameContent.element);
-    if (level.type === `game-3` || isAllAnswers(answers, options.length)) {
+    if (level.type === `game3` || isAllAnswers(answers, options.length)) {
       gameState = saveAnswer(level, answers, gameState);
       const currentAnswer = gameState.answers[gameState.level].status;
 
@@ -51,13 +43,13 @@ const updateGame = (state) => {
       updateGame(gameState);
     }
   };
+
+  changeScreen(gameContent.element);
 };
 
 const startGame = () => {
   gameState = Object.assign({}, INITIAL_STATE);
-
   updateGame(gameState);
-  changeScreen(gameContainerElement);
 };
 
 export default startGame;

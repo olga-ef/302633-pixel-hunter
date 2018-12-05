@@ -1,8 +1,5 @@
-const Point = {
-  BASE: 100,
-  BONUS: 50,
-  PENALTY: -50
-};
+import {Point} from '../data/config';
+
 const ANSWERS_LIMIT = 7;
 
 const getFinalScore = (rightAnswers, fastAnswers, slowAnswers, lives) => {

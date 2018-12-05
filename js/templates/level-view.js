@@ -3,10 +3,11 @@ import {getStats} from './stats';
 import {getOptions} from './options';
 
 class LevelView extends AbstractView {
-  constructor(state, level) {
+  constructor(state, level, header) {
     super();
     this.state = state;
     this.level = level;
+    this.header = header.element;
   }
 
   get template() {
@@ -15,6 +16,10 @@ class LevelView extends AbstractView {
       ${getOptions(this.level)}
       ${getStats(this.state)}
     </section>`;
+  }
+
+  afterRender() {
+    this.element.insertAdjacentElement(`afterbegin`, this.header);
   }
 
   onAnswer() {

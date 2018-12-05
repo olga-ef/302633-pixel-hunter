@@ -15,9 +15,14 @@ class AbstractView {
     }
 
     this._element = this.render();
+    this.afterRender();
     this.bind(this._element);
 
     return this._element;
+  }
+
+  afterRender() {
+
   }
 
   render() {
@@ -25,6 +30,7 @@ class AbstractView {
     container.innerHTML = this.template.trim();
     return container;
   }
+
 
   bind() {
 
