@@ -1,51 +1,51 @@
-import {render, changeScreen} from '../util';
+import AbstractView from './abstract-view';
 import {getStats} from './stats';
-import {renderHeader, HEADER_SHORT} from './header';
-import calculateScore from '../game/score';
+import {Point} from '../data/config';
 
-const showGameOver = (state) => {
-  const score = calculateScore(state.answers, state.lives);
-  const title = (score.finalScore === -1) ? `Поражение` : `Победа`;
+class ResultView extends AbstractView {
+  constructor(state, score, header) {
+    super();
+    this.state = state;
+    this.score = score;
+    this.title = (this.score.finalScore === -1) ? `Поражение` : `Победа`;
+    this. header = header.element;
+  }
 
-  const containerElement = render();
-  const headerElement = renderHeader(HEADER_SHORT);
-  const contentElement = render();
-
-  const template = `
-    <section class="result">
-      <h2 class="result__title">${title}</h2>
+  get template() {
+    return `<section class="result">
+      <h2 class="result__title">${this.title}</h2>
       <table class="result__table">
         <tr>
           <td class="result__number">1.</td>
           <td colspan="2">
-            ${getStats(state)}
+            ${getStats(this.state)}
           </td>
-          <td class="result__points">${score.correct} × 100</td>
-          <td class="result__total">${score.correct * 100}</td>
+          <td class="result__points">${this.score.correct} × 100</td>
+          <td class="result__total">${this.score.correct * Point.BASE}</td>
         </tr>
         <tr>
           <td></td>
           <td class="result__extra">Бонус за скорость:</td>
-          <td class="result__extra">${score.fast} <span class="stats__result stats__result--fast"></span></td>
+          <td class="result__extra">${this.score.fast} <span class="stats__result stats__result--fast"></span></td>
           <td class="result__points">× 50</td>
-          <td class="result__total">${score.fast * 50}</td>
+          <td class="result__total">${this.score.fast * Point.BONUS}</td>
         </tr>
         <tr>
           <td></td>
           <td class="result__extra">Бонус за жизни:</td>
-          <td class="result__extra">${state.lives} <span class="stats__result stats__result--alive"></span></td>
+          <td class="result__extra">${this.state.lives} <span class="stats__result stats__result--alive"></span></td>
           <td class="result__points">× 50</td>
-          <td class="result__total">${state.lives * 50}</td>
+          <td class="result__total">${this.state.lives * Point.BONUS}</td>
         </tr>
         <tr>
           <td></td>
           <td class="result__extra">Штраф за медлительность:</td>
-          <td class="result__extra">${score.slow} <span class="stats__result stats__result--slow"></span></td>
+          <td class="result__extra">${this.score.slow} <span class="stats__result stats__result--slow"></span></td>
           <td class="result__points">× 50</td>
-          <td class="result__total">${score.slow * -50}</td>
+          <td class="result__total">${this.score.slow * -Point.PENALTY}</td>
         </tr>
         <tr>
-          <td colspan="5" class="result__total  result__total--final">${score.finalScore !== -1 ? score.finalScore : `FAIL`}</td>
+          <td colspan="5" class="result__total  result__total--final">${this.score.finalScore !== -1 ? this.score.finalScore : `FAIL`}</td>
         </tr>
       </table>
       <table class="result__table">
@@ -101,12 +101,12 @@ const showGameOver = (state) => {
         </tr>
       </table>
     </section>`;
+  }
 
-  contentElement.innerHTML = template;
-  containerElement.appendChild(headerElement);
-  containerElement.appendChild(contentElement);
+  afterRender() {
+    this.element.insertAdjacentElement(`afterbegin`, this.header);
+  }
+}
 
-  changeScreen(containerElement);
-};
+export default ResultView;
 
-export default showGameOver;

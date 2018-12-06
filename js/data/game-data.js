@@ -24,12 +24,12 @@ const LEVELS = [
   {
     question: `Угадайте для каждого изображения фото или рисунок?`,
     options: [{image: paintings[0], type: `paint`, key: 1}, {image: photos[0], type: `photo`, key: 2}],
-    type: `game-1`
+    type: `game1`
   },
   {
     question: `Угадай, фото или рисунок?`,
     options: [{image: photos[1], type: `photo`, key: 1}],
-    type: `game-2`
+    type: `game2`
   },
   {
     question: `Найдите рисунок среди изображений`,
@@ -38,7 +38,7 @@ const LEVELS = [
       {image: paintings[2], type: true, key: 2},
       {image: photos[0], type: false, key: 3}
     ],
-    type: `game-3`
+    type: `game3`
   },
   {
     question: `Найдите фотографию среди изображений`,
@@ -47,32 +47,32 @@ const LEVELS = [
       {image: paintings[2], type: false, key: 2},
       {image: photos[0], type: true, key: 3}
     ],
-    type: `game-3`
+    type: `game3`
   },
   {
     question: `Угадай, фото или рисунок?`,
     options: [{image: paintings[1], type: `paint`, key: 1}],
-    type: `game-2`
+    type: `game2`
   },
   {
     question: `Угадай, фото или рисунок?`,
     options: [{image: photos[0], type: `photo`, key: 1}],
-    type: `game-2`
+    type: `game2`
   },
   {
     question: `Угадайте для каждого изображения фото или рисунок?`,
     options: [{image: paintings[1], type: `paint`, key: 1}, {image: photos[2], type: `photo`, key: 2}],
-    type: `game-1`
+    type: `game1`
   },
   {
     question: `Угадайте для каждого изображения фото или рисунок?`,
     options: [{image: paintings[0], type: `paint`, key: 1}, {image: photos[1], type: `photo`, key: 2}],
-    type: `game-1`
+    type: `game1`
   },
   {
     question: `Угадайте для каждого изображения фото или рисунок?`,
     options: [{image: photos[1], type: `photo`, key: 1}, {image: paintings[1], type: `paint`, key: 2}],
-    type: `game-1`
+    type: `game1`
   },
   {
     question: `Найдите рисунок среди изображений`,
@@ -81,7 +81,7 @@ const LEVELS = [
       {image: paintings[0], type: true, key: 2},
       {image: photos[0], type: false, key: 3}
     ],
-    type: `game-3`
+    type: `game3`
   }
 ];
 

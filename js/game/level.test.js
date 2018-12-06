@@ -1,6 +1,6 @@
 import {assert} from 'chai';
 import {changeLevel} from './level.js';
-import {INITIAL_STATE} from '../data/initial-state.js';
+import {INITIAL_STATE} from '../data/config.js';
 
 describe(`Check level change`, () => {
   it(`should increase level by 1`, () => {

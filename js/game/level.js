@@ -1,6 +1,6 @@
 const LAST_LEVEL = 10;
 
-export const canContinue = (state) => state.level < LAST_LEVEL;
+export const canContinue = (state) => state.level < LAST_LEVEL && state.lives > 0;
 
 export const changeLevel = (state) => {
   if (typeof state.level !== `number`) {
