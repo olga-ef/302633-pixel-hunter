@@ -20,7 +20,8 @@ class GameModel {
 
   // сбрасывает состояние до начального
   restart() {
-    this._state = INITIAL_STATE;
+    this._state = Object.assign({}, INITIAL_STATE);
+    this.clearAnswers();
   }
 
   // проверяет есть ли следующий уровень
@@ -65,6 +66,11 @@ class GameModel {
   // сохраняет ответ
   addAnswer(answer = `wrong`) {
     this._state = addAnswer(this._state, answer);
+    console.log(INITIAL_STATE);
+  }
+
+  clearAnswers() {
+    this._state.answers = [];
   }
 }
 

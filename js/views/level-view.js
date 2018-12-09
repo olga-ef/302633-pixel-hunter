@@ -41,11 +41,11 @@ class LevelView extends AbstractView {
 
   bind() {
     const answersElement = this.element.querySelector(`.game__content`);
-    this.element.addEventListener(`click`, (e) => {
+    answersElement.addEventListener(`click`, (e) => {
       if (e.target.tagName === 'INPUT' || this.level.type === `game3`) {
         const answers = this.getAnswers(this.level.type, e.target);
-        console.log(answers)
         this.onAnswer(answers, this.level);
+        return;
       }
     });
   }

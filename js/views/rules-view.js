@@ -46,7 +46,7 @@ class RulesView extends AbstractView {
     rulesInput.addEventListener(`input`, () => this.onInput(rulesButton, rulesInput));
     rulesForm.addEventListener(`submit`, (e) => {
       e.preventDefault();
-      this.onSubmit();
+      this.onSubmit(rulesInput.value);
     });
   }
 }

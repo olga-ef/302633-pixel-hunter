@@ -27,10 +27,11 @@ const calculateScore = (answers, lives) => {
     throw new Error(`Second parameter should be number`);
   }
 
-  const rightAnswers = answers.filter((answer) => answer.status !== `wrong`);
+  const rightAnswers = answers.filter((answer) => answer !== `wrong`);
+  console.log(rightAnswers);
 
-  const fastAnswers = rightAnswers.filter((answer) => answer.status === `fast`);
-  const slowAnswers = rightAnswers.filter((answer) => answer.status === `slow`);
+  const fastAnswers = rightAnswers.filter((answer) => answer === `fast`);
+  const slowAnswers = rightAnswers.filter((answer) => answer === `slow`);
 
   const finalScore = getFinalScore(rightAnswers, fastAnswers, slowAnswers, lives);
 
