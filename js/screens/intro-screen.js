@@ -12,7 +12,7 @@ class IntroScreen {
     return this.intro.element;
   }
   nextScreen() {
-    Application.showWelcome()
+    Application.showWelcome();
   }
 
   bind() {

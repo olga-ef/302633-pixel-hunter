@@ -27,7 +27,7 @@ class Application {
     gameScreen.startGame();
   }
 
-  static ShowResult(state) {
+  static showResult(state) {
     const result = new ResultScreen(state);
     changeScreen(result.element);
   }

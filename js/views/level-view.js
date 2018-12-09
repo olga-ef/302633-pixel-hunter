@@ -31,8 +31,9 @@ class LevelView extends AbstractView {
       return [currentTarget];
     }
     const answers = Array.from(this.element.querySelectorAll(`.game__option input`));
-     const checked = answers.filter((answer) => answer.checked)
-     return checked;
+    const checked = answers.filter((answer) => answer.checked);
+
+    return checked;
   }
 
   onAnswer() {
@@ -42,7 +43,7 @@ class LevelView extends AbstractView {
   bind() {
     const answersElement = this.element.querySelector(`.game__content`);
     answersElement.addEventListener(`click`, (e) => {
-      if (e.target.tagName === 'INPUT' || this.level.type === `game3`) {
+      if (e.target.tagName === `INPUT` || this.level.type === `game3`) {
         const answers = this.getAnswers(this.level.type, e.target);
         this.onAnswer(answers, this.level);
         return;

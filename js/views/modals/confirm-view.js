@@ -43,7 +43,7 @@ class ConfirmModalView extends AbstractView {
     btnClose.addEventListener(`click`, (e) => {
       e.preventDefault();
       this.onCancel();
-    })
+    });
   }
 }
 

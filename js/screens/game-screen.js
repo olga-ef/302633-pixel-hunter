@@ -1,10 +1,7 @@
 import {changeScreen} from '../util';
 import HeaderView from '../views/header-view';
-import {INITIAL_STATE, HEADER_FULL} from '../data/config';
-import LEVELS from '../data/game-data';
+import {HEADER_FULL} from '../data/config';
 import LevelView from '../views/level-view';
-import {decreaseLives} from '../game/lives';
-import {changeLevel, canContinue} from '../game/level';
 import {isAllAnswers, checkAnswer} from '../game/answer';
 import Application from '../application';
 import ConfirmView from '../views/modals/confirm-view';
@@ -18,7 +15,7 @@ class GameScreen {
     this._timer = null;
   }
 
-  get element () {
+  get element() {
     return this.level.element;
   }
 
@@ -40,10 +37,9 @@ class GameScreen {
 
   // запуск таймера
   _tick() {
-    if(!this.model.isTimeEnd()) {
-      this.model.tick()
+    if (!this.model.isTimeEnd()) {
+      this.model.tick();
       this.updateHeader();
-      const timer = null;
       this._timer = setTimeout(() => this._tick(), 1000);
       return;
     }
@@ -71,7 +67,7 @@ class GameScreen {
       this.startGame();
       return;
     }
-    Application.ShowResult(this.model.state);
+    Application.showResult(this.model.state);
   }
 
   // обраотка ответа

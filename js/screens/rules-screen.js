@@ -7,7 +7,7 @@ class RulesScreen {
   constructor() {
     this.header = new HeaderView(HEADER_SHORT);
     this.rules = new RulesView(this.header);
-    this.bind()
+    this.bind();
   }
 
   get element() {
@@ -22,7 +22,7 @@ class RulesScreen {
     Application.showGame(playerName);
   }
 
-  bind(){
+  bind() {
     this.rules.onSubmit = this.nextScreen;
     this.header.onClick = this.exit;
   }

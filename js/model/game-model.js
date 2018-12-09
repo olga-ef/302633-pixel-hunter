@@ -66,7 +66,6 @@ class GameModel {
   // сохраняет ответ
   addAnswer(answer = `wrong`) {
     this._state = addAnswer(this._state, answer);
-    console.log(INITIAL_STATE);
   }
 
   clearAnswers() {

@@ -1,6 +1,3 @@
-
-export const canContinue = (state) => state.level < LAST_LEVEL && state.lives > 0;
-
 export const changeLevel = (state) => {
   if (typeof state.level !== `number`) {
     throw new Error(`Level should be a number`);

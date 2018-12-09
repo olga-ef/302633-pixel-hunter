@@ -28,7 +28,6 @@ const calculateScore = (answers, lives) => {
   }
 
   const rightAnswers = answers.filter((answer) => answer !== `wrong`);
-  console.log(rightAnswers);
 
   const fastAnswers = rightAnswers.filter((answer) => answer === `fast`);
   const slowAnswers = rightAnswers.filter((answer) => answer === `slow`);
