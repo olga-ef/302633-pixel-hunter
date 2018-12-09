@@ -7,3 +7,4 @@ export const decreaseLives = (state) => {
 
   return newState;
 };
+
