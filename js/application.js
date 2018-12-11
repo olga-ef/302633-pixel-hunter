@@ -7,28 +7,29 @@ import GameModel from './model/game-model';
 import {changeScreen} from './util';
 
 class Application {
-  static showIntro() {
-    const intro = new IntroScreen();
+  showIntro() {
+    const intro = new IntroScreen(this.showWelcome.bind(this));
     changeScreen(intro.element);
   }
 
-  static showWelcome() {
-    const welcome = new WelcomeScreen();
+  showWelcome() {
+    const welcome = new WelcomeScreen(this.showRules.bind(this));
     changeScreen(welcome.element);
   }
 
-  static showRules() {
-    const rulesScreen = new RulesScreen();
+  showRules() {
+    const rulesScreen = new RulesScreen(this.showGame.bind(this), this.showWelcome.bind(this));
     changeScreen(rulesScreen.element);
   }
 
-  static showGame(playerName) {
-    const gameScreen = new GameScreen(new GameModel(playerName));
+  showGame(playerName) {
+    const gameScreen = new GameScreen(new GameModel(playerName), this.showResult.bind(this),
+        this.showWelcome.bind(this));
     gameScreen.startGame();
   }
 
-  static showResult(state) {
-    const result = new ResultScreen(state);
+  showResult(state) {
+    const result = new ResultScreen(state, this.showWelcome.bind(this));
     changeScreen(result.element);
   }
 }

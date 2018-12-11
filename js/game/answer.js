@@ -9,6 +9,13 @@ const Time = {
   SLOW: 10
 };
 
+const Answer = {
+  CORRECT: `correct`,
+  FAST: `fast`,
+  SLOW: `slow`,
+  WRONG: `wrong`
+};
+
 const isCorrect = (answers, level) => {
   const answerStatus = answers.every((answer) => {
     const currentOption = level.options.find((option) => option.key.toString() === answer.dataset.key);
@@ -22,16 +29,18 @@ const isCorrect = (answers, level) => {
 
 export const checkAnswer = (level, answers, time) => {
   if (!isCorrect(answers, level)) {
-    return `wrong`;
+    return Answer.WRONG;
   }
 
   if (time > Time.FAST) {
-    return `fast`;
-  } else if (time < Time.SLOW) {
-    return `slow`;
-  } else {
-    return `correct`;
+    return Answer.FAST;
   }
+
+  if (time < Time.SLOW) {
+    return Answer.SLOW;
+  }
+
+  return Answer.CORRECT;
 };
 
 

@@ -3,25 +3,34 @@ import HeaderView from '../views/header-view';
 import {HEADER_FULL} from '../data/config';
 import LevelView from '../views/level-view';
 import {isAllAnswers, checkAnswer} from '../game/answer';
-import Application from '../application';
 import ConfirmView from '../views/modals/confirm-view';
 
 class GameScreen {
-  constructor(model) {
+  constructor(model, callback1, callback2) {
     this.model = model;
     this.header = new HeaderView(HEADER_FULL, this.model.state);
     this.level = new LevelView(this.model.state, this.model.getCurrentLevel(), this.header);
     this.confirmForm = new ConfirmView();
     this._timer = null;
+    this.bind(callback1, callback2);
   }
 
   get element() {
     return this.level.element;
   }
 
+  bind(fnNext, fnBack) {
+    this.exit = () => fnBack();
+    this.endGame = (state) => fnNext(state);
+  }
+
+  updateTime() {
+    this.header.updateTime(this.model.state.time);
+  }
+
   updateHeader() {
     const header = new HeaderView(HEADER_FULL, this.model.state);
-    header.onClick = this.showModal.bind(this);
+    header.onClick = () => this.showModal(this.confirmForm);
     this.level.element.replaceChild(header.element, this.header.element);
     this.header = header;
   }
@@ -39,7 +48,7 @@ class GameScreen {
   _tick() {
     if (!this.model.isTimeEnd()) {
       this.model.tick();
-      this.updateHeader();
+      this.updateTime();
       this._timer = setTimeout(() => this._tick(), 1000);
       return;
     }
@@ -60,14 +69,14 @@ class GameScreen {
   }
 
   // закончить уровень
-  endLevel(canContinue) {
-    if (canContinue && this.model.isNextLevel()) {
+  endLevel() {
+    if (!this.model.isDead() && this.model.isNextLevel()) {
       this.model.nextLevel();
       this.model.restartTime();
       this.startGame();
       return;
     }
-    Application.showResult(this.model.state);
+    this.endGame(this.model.state);
   }
 
   // обраотка ответа
@@ -82,21 +91,21 @@ class GameScreen {
     if (answerStatus === `wrong`) {
       this.model.decreaseLives();
     }
-    this.endLevel(!this.model.isDead());
+    this.endLevel();
   }
 
-  exit() {
-    Application.showWelcome();
+  removeModal(parentElement, element) {
+    parentElement.removeChild(element);
   }
 
-  removeModal() {
-    this.level.element.removeChild(this.confirmForm.element);
-  }
-
-  showModal() {
-    this.confirmForm.onConfirm = this.exit.bind(this);
-    this.confirmForm.onCancel = this.removeModal.bind(this);
+  showModal(form) {
+    form.onConfirm = () => this.exit();
+    form.onCancel = () => this.removeModal(this.level.element, this.confirmForm.element);
     this.level.element.appendChild(this.confirmForm.element);
+  }
+
+  endGame() {
+
   }
 }
 

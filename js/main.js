@@ -1,3 +1,4 @@
 import Application from './application';
 
-Application.showIntro();
+const app = new Application();
+app.showIntro();
