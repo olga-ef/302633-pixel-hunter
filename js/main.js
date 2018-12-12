@@ -1,3 +1,4 @@
-import renderInto from './screens/intro';
+import Application from './application';
 
-renderInto();
+const app = new Application();
+app.showIntro();

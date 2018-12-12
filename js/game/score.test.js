@@ -2,78 +2,12 @@ import {assert} from 'chai';
 import calculateScore from './score.js';
 
 const Result = {
-  FIRST: [
-    {status: `correct`, time: 30},
-    {status: `wrong`, time: 30},
-    {status: `wrong`, time: 30},
-    {status: `wrong`, time: 30},
-    {status: `wrong`, time: 30},
-    {status: `correct`, time: 30},
-    {status: `correct`, time: 30},
-    {status: `correct`, time: 30},
-    {status: `correct`, time: 30},
-    {status: `correct`, time: 30}
-  ],
-  SECOND: [
-    {status: `correct`, time: 15},
-    {status: `correct`, time: 15},
-    {status: `correct`, time: 15},
-    {status: `correct`, time: 15},
-    {status: `correct`, time: 15},
-    {status: `correct`, time: 15},
-    {status: `correct`, time: 15},
-    {status: `correct`, time: 15},
-    {status: `correct`, time: 15},
-    {status: `correct`, time: 15}
-  ],
-  THIRD: [
-    {status: `fast`, time: 9},
-    {status: `fast`, time: 9},
-    {status: `fast`, time: 9},
-    {status: `fast`, time: 9},
-    {status: `fast`, time: 9},
-    {status: `fast`, time: 9},
-    {status: `fast`, time: 9},
-    {status: `fast`, time: 9},
-    {status: `fast`, time: 9},
-    {status: `fast`, time: 9}
-  ],
-  FORTH: [
-    {status: `slow`, time: 22},
-    {status: `slow`, time: 22},
-    {status: `slow`, time: 22},
-    {status: `slow`, time: 22},
-    {status: `slow`, time: 22},
-    {status: `slow`, time: 22},
-    {status: `slow`, time: 22},
-    {status: `slow`, time: 22},
-    {status: `slow`, time: 22},
-    {status: `slow`, time: 22}
-  ],
-  FIFTH: [
-    {status: `fast`, time: 5},
-    {status: `fast`, time: 5},
-    {status: `fast`, time: 5},
-    {status: `fast`, time: 5},
-    {status: `fast`, time: 5},
-    {status: `correct`, time: 12},
-    {status: `correct`, time: 12},
-    {status: `correct`, time: 12},
-    {status: `slow`, time: 22},
-    {status: `slow`, time: 22}
-  ],
-  SIXTH: [
-    {status: `fast`, time: 5},
-    {status: `fast`, time: 5},
-    {status: `slow`, time: 25},
-    {status: `slow`, time: 25},
-    {status: `slow`, time: 25},
-    {status: `slow`, time: 25},
-    {status: `correct`, time: 18},
-    {status: `correct`, time: 18},
-    {status: `correct`, time: 18},
-    {status: `correct`, time: 18}
-  ]
+  FIRST: [`correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `wrong`, `wrong`, `wrong`, `wrong`],
+  SECOND: [`correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `correct`],
+  THIRD: [`fast`, `fast`, `fast`, `fast`, `fast`, `fast`, `fast`, `fast`, `fast`, `fast`],
+  FORTH: [`slow`, `slow`, `slow`, `slow`, `slow`, `slow`, `slow`, `slow`, `slow`, `slow`],
+  FIFTH: [`fast`, `fast`, `fast`, `fast`, `fast`, `correct`, `correct`, `correct`, `slow`, `slow`],
+  SIXTH: [`fast`, `fast`, `slow`, `slow`, `slow`, `slow`, `correct`, `correct`, `correct`, `correct`]
 };
 
 describe(`Check calculating score`, () => {

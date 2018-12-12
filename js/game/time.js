@@ -1,4 +1,4 @@
-export const decreaseTime = (state) => {
+export const tick = (state) => {
   if (state.time <= 0) {
     return -1;
   }

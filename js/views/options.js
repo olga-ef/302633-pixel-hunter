@@ -27,7 +27,7 @@ const getLabels = (level, i, key) => {
 export const getOptions = (level) => {
   return `<form class="game__content ${CONTENT_CLASS[level.type]}">
     ${[...level.options].map((option, i) => `
-      <div class="game__option" data-key="${option.key}">
+      <div class="game__option" data-key="${option.key}" >
          <img src="${option.image}" width="${IMAGE_SIZE[level.type].width}" height="${IMAGE_SIZE[level.type].height}">
          ${getLabels(level, i, option.key)}
       </div>`).join(``)}
