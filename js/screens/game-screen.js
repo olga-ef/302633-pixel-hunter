@@ -81,7 +81,7 @@ class GameScreen {
 
   // обраотка ответа
   answer(answers, level) {
-    if (!isAllAnswers(answers, level.type)) {
+    if (!isAllAnswers(answers, level)) {
       return;
     }
     this.stopGame();

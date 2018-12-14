@@ -1,6 +1,7 @@
 import AbstractView from './abstract-view';
 import {getStats} from './stats';
 import {getOptions} from './options';
+import {LevelType} from '../data/config';
 
 class LevelView extends AbstractView {
   constructor(state, level, header) {
@@ -23,7 +24,7 @@ class LevelView extends AbstractView {
   }
 
   getAnswers(levelType, target) {
-    if (levelType === `game3`) {
+    if (levelType === LevelType.GAME_3) {
       let currentTarget = target;
       while (!currentTarget.classList.contains(`game__option`)) {
         currentTarget = currentTarget.parentElement;
@@ -43,7 +44,7 @@ class LevelView extends AbstractView {
   bind() {
     const answersElement = this.element.querySelector(`.game__content`);
     answersElement.addEventListener(`click`, (e) => {
-      if (e.target.tagName === `INPUT` || this.level.type === `game3`) {
+      if (e.target.tagName === `INPUT` || this.level.type === LevelType.GAME_3) {
         const answers = this.getAnswers(this.level.type, e.target);
         this.onAnswer(answers, this.level);
         return;

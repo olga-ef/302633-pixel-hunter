@@ -13,3 +13,14 @@ export const Point = {
   BONUS: 50,
   PENALTY: -50
 };
+
+export const LevelType = {
+  GAME_1: `two-of-two`,
+  GAME_2: `tinder-like`,
+  GAME_3: `one-of-three`
+};
+
+export const AnswerType = {
+  PAINTING: `painting`,
+  PHOTO: `photo`
+};

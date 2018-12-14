@@ -1,15 +1,15 @@
-import QUESTIONS from '../data/game-data';
 import {INITIAL_STATE} from '../data/config';
 import {changeLevel} from '../game/level';
 import {decreaseLives} from '../game/lives';
 import {tick} from '../game/time';
 import {addAnswer} from '../game/answer';
 
-const getLevel = (level) => QUESTIONS[level];
+const getLevel = (data, level) => data[level];
 
 class GameModel {
-  constructor(playerName) {
+  constructor(data, playerName) {
     this.playerName = playerName;
+    this.data = data;
     this.restart();
   }
 
@@ -26,17 +26,17 @@ class GameModel {
 
   // проверяет есть ли следующий уровень
   isNextLevel() {
-    return getLevel(this._state.level + 1) !== void 0;
+    return getLevel(this.data, this._state.level + 1) !== void 0;
   }
 
   // увеличивает уровень
   nextLevel() {
-    this._state = changeLevel(this._state);
+    this._state = changeLevel(this._state, this.data);
   }
 
   // получает текущий уровень
   getCurrentLevel() {
-    return getLevel(this._state.level);
+    return getLevel(this.data, this._state.level);
   }
 
   // проверяет отстались ли еще жизни

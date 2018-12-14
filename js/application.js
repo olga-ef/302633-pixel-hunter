@@ -5,11 +5,39 @@ import GameScreen from './screens/game-screen';
 import ResultScreen from './screens/result-screen';
 import GameModel from './model/game-model';
 import {changeScreen} from './util';
+import adaptServerData from './game/adapter';
+
+const Status = {
+  OK: 200,
+  REDIRECT: 300
+};
+
+const URL = `https://es.dump.academy/pixel-hunter/questions`;
+
+const checkStatus = (response) => {
+  if (response.status >= Status.OK && response.status < Status.REDIRECT) {
+    return response;
+  } else {
+    throw new Error(`${response.status}: ${response.statusText}`);
+  }
+};
+
+let gameData;
+
+const setGameData = (data) => {
+  gameData = adaptServerData(data);
+};
 
 class Application {
   showIntro() {
     const intro = new IntroScreen(this.showWelcome.bind(this));
     changeScreen(intro.element);
+    window.fetch(URL).
+      then((response) => checkStatus(response)).
+      then((response) => response.json()).
+      then((data) => setGameData(data)).
+      then(() => this.showWelcome(this.showRules.bind(this))).
+      catch(() => intro.showError);
   }
 
   showWelcome() {
@@ -23,7 +51,7 @@ class Application {
   }
 
   showGame(playerName) {
-    const gameScreen = new GameScreen(new GameModel(playerName), this.showResult.bind(this),
+    const gameScreen = new GameScreen(new GameModel(gameData, playerName), this.showResult.bind(this),
         this.showWelcome.bind(this));
     gameScreen.startGame();
   }
