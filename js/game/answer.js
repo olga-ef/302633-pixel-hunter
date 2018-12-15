@@ -1,8 +1,4 @@
-const ANSWERS_NUMBER = {
-  game1: 2,
-  game2: 1,
-  game3: 1
-};
+import {LevelType} from '../data/config';
 
 const Time = {
   FAST: 20,
@@ -18,8 +14,8 @@ const Answer = {
 
 const isCorrect = (answers, level) => {
   const answerStatus = answers.every((answer) => {
-    const currentOption = level.options.find((option) => option.key.toString() === answer.dataset.key);
-    const result = level.type === `game3` ? currentOption.type : currentOption.type === answer.value;
+    const currentOption = level.answers.find((option) => option.image.url === answer.dataset.key);
+    const result = level.type === LevelType.GAME_3 ? currentOption.type : currentOption.type === answer.value;
 
     return result;
   });
@@ -44,8 +40,11 @@ export const checkAnswer = (level, answers, time) => {
 };
 
 
-export const isAllAnswers = (answers, levelType) => {
-  return answers.length === ANSWERS_NUMBER[levelType];
+export const isAllAnswers = (answers, level) => {
+  if (level.type === LevelType.GAME_1) {
+    return answers.length === level.answers.length;
+  }
+  return true;
 };
 
 export const addAnswer = (state, answerStatus) => {
