@@ -1,8 +1,8 @@
-export const getStats = (state) => `<ul class="stats">
-  ${state.answers.map((answer) => `
+export const getStats = (answers) => `<ul class="stats">
+  ${answers.map((answer) => `
     <li class="stats__result stats__result--${answer}"></li>`)
     .join(``)}
-  ${new Array(10 - state.answers.length)
+  ${new Array(10 - answers.length)
     .fill(`<li class="stats__result stats__result--unknown"></li>`)
     .join(``)}
 </ul>`;

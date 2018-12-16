@@ -2,17 +2,17 @@ import WelcomeView from '../views/welcome-view';
 
 
 class WelcomeScreen {
-  constructor(callback) {
+  constructor(onNext) {
     this.welcome = new WelcomeView();
-    this.bind(callback);
+    this.bind(onNext);
   }
 
   get element() {
     return this.welcome.element;
   }
 
-  bind(fn) {
-    this.welcome.onClick = fn;
+  bind(onNext) {
+    this.welcome.onClick = onNext;
   }
 }
 

@@ -6,22 +6,22 @@ import {isAllAnswers, checkAnswer} from '../game/answer';
 import ConfirmView from '../views/modals/confirm-view';
 
 class GameScreen {
-  constructor(model, callback1, callback2) {
+  constructor(model, onNext, onBack) {
     this.model = model;
     this.header = new HeaderView(HEADER_FULL, this.model.state);
     this.level = new LevelView(this.model.state, this.model.getCurrentLevel(), this.header);
     this.confirmForm = new ConfirmView();
     this._timer = null;
-    this.bind(callback1, callback2);
+    this.bind(onNext, onBack);
   }
 
   get element() {
     return this.level.element;
   }
 
-  bind(fnNext, fnBack) {
-    this.exit = () => fnBack();
-    this.endGame = (state) => fnNext(state);
+  bind(onNext, onBack) {
+    this.exit = () => onBack();
+    this.endGame = (state) => onNext(state);
   }
 
   updateTime() {
@@ -41,7 +41,7 @@ class GameScreen {
     this.level = level;
     this.updateHeader();
     level.onAnswer = this.answer.bind(this);
-    changeScreen(level.element);
+    changeScreen(level);
   }
 
   // запуск таймера
@@ -76,7 +76,7 @@ class GameScreen {
       this.startGame();
       return;
     }
-    this.endGame(this.model.state);
+    this.endGame(this.model);
   }
 
   // обраотка ответа

@@ -1,4 +1,4 @@
-import {Point} from '../data/config';
+import {Point, Result} from '../data/config';
 
 const ANSWERS_LIMIT = 7;
 
@@ -27,10 +27,10 @@ const calculateScore = (answers, lives) => {
     throw new Error(`Second parameter should be number`);
   }
 
-  const rightAnswers = answers.filter((answer) => answer !== `wrong`);
+  const rightAnswers = answers.filter((answer) => answer !== Result.WRONG);
 
-  const fastAnswers = rightAnswers.filter((answer) => answer === `fast`);
-  const slowAnswers = rightAnswers.filter((answer) => answer === `slow`);
+  const fastAnswers = rightAnswers.filter((answer) => answer === Result.FAST);
+  const slowAnswers = rightAnswers.filter((answer) => answer === Result.SLOW);
 
   const finalScore = getFinalScore(rightAnswers, fastAnswers, slowAnswers, lives);
 

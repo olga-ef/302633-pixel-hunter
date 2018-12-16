@@ -24,3 +24,10 @@ export const AnswerType = {
   PAINTING: `painting`,
   PHOTO: `photo`
 };
+
+export const Result = {
+  CORRECT: `correct`,
+  FAST: `fast`,
+  SLOW: `slow`,
+  WRONG: `wrong`
+};
