@@ -1,15 +1,7 @@
-import {LevelType} from '../data/config';
-
+import {LevelType, Result} from '../data/config';
 const Time = {
   FAST: 20,
   SLOW: 10
-};
-
-const Answer = {
-  CORRECT: `correct`,
-  FAST: `fast`,
-  SLOW: `slow`,
-  WRONG: `wrong`
 };
 
 const isCorrect = (answers, level) => {
@@ -25,18 +17,18 @@ const isCorrect = (answers, level) => {
 
 export const checkAnswer = (level, answers, time) => {
   if (!isCorrect(answers, level)) {
-    return Answer.WRONG;
+    return Result.WRONG;
   }
 
   if (time > Time.FAST) {
-    return Answer.FAST;
+    return Result.FAST;
   }
 
   if (time < Time.SLOW) {
-    return Answer.SLOW;
+    return Result.SLOW;
   }
 
-  return Answer.CORRECT;
+  return Result.CORRECT;
 };
 
 

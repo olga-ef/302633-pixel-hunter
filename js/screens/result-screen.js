@@ -1,23 +1,32 @@
 import ResultView from '../views/result-view';
 import HeaderView from '../views/header-view';
+import ErrorModalView from '../views/modals/error-view';
 import {HEADER_SHORT} from '../data/config';
-import calculateScore from '../game/score';
+
 
 class ResultScreen {
-  constructor(state, callBack) {
+  constructor(state, onBack) {
     this.state = state;
-    this.score = calculateScore(this.state.answers, this.state.lives);
     this.header = new HeaderView(HEADER_SHORT);
-    this.result = new ResultView(this.state, this.score, this.header);
-    this.bind(callBack);
+    this.result = new ResultView(this.header);
+    this.errorModal = new ErrorModalView();
+    this.bind(onBack);
   }
 
   get element() {
     return this.result.element;
   }
 
-  bind(fn) {
-    this.header.onClick = () => fn();
+  bind(onBack) {
+    this.header.onClick = () => onBack();
+  }
+
+  showError() {
+    this.result.element.appendChild(this.errorModal.element);
+  }
+
+  showScores(data) {
+    this.result.showScores(data);
   }
 }
 

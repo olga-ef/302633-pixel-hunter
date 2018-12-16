@@ -15,7 +15,7 @@ class LevelView extends AbstractView {
     return `<section class="game">
       <p class="game__task">${this.level.question}</p>
       ${getOptions(this.level)}
-      ${getStats(this.state)}
+      ${getStats(this.state.answers)}
     </section>`;
   }
 

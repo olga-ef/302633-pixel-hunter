@@ -13,6 +13,10 @@ class ErrorModalView extends AbstractView {
       </div>
     </section>`;
   }
+
+  showError() {
+    this.intro.element.appendChild(this.errorModal.element);
+  }
 }
 
 export default ErrorModalView;

@@ -5,36 +5,19 @@ import GameScreen from './screens/game-screen';
 import ResultScreen from './screens/result-screen';
 import GameModel from './model/game-model';
 import {changeScreen} from './util';
-import adaptServerData from './game/adapter';
-
-const Status = {
-  OK: 200,
-  REDIRECT: 300
-};
-
-const URL = `https://es.dump.academy/pixel-hunter/questions`;
-
-const checkStatus = (response) => {
-  if (response.status >= Status.OK && response.status < Status.REDIRECT) {
-    return response;
-  } else {
-    throw new Error(`${response.status}: ${response.statusText}`);
-  }
-};
+import Loader from './game/loader';
 
 let gameData;
 
 const setGameData = (data) => {
-  gameData = adaptServerData(data);
+  gameData = data;
 };
 
 class Application {
   showIntro() {
     const intro = new IntroScreen(this.showWelcome.bind(this));
-    changeScreen(intro.element);
-    window.fetch(URL).
-      then((response) => checkStatus(response)).
-      then((response) => response.json()).
+    changeScreen(intro);
+    Loader.loadData().
       then((data) => setGameData(data)).
       then(() => this.showWelcome(this.showRules.bind(this))).
       catch(() => intro.showError);
@@ -42,12 +25,12 @@ class Application {
 
   showWelcome() {
     const welcome = new WelcomeScreen(this.showRules.bind(this));
-    changeScreen(welcome.element);
+    changeScreen(welcome);
   }
 
   showRules() {
     const rulesScreen = new RulesScreen(this.showGame.bind(this), this.showWelcome.bind(this));
-    changeScreen(rulesScreen.element);
+    changeScreen(rulesScreen);
   }
 
   showGame(playerName) {
@@ -56,9 +39,14 @@ class Application {
     gameScreen.startGame();
   }
 
-  showResult(state) {
-    const result = new ResultScreen(state, this.showWelcome.bind(this));
-    changeScreen(result.element);
+  showResult(model) {
+    const playerName = model.playerName;
+    const result = new ResultScreen(model.state, this.showWelcome.bind(this));
+    changeScreen(result);
+    Loader.saveResult(model.state.answers, model.state.lives, playerName).
+      then(() => Loader.loadResults(playerName)).
+      then((data) => result.showScores(data)).
+      catch(() => result.showError());
   }
 }
 
