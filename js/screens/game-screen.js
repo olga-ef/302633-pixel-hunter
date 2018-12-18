@@ -12,6 +12,7 @@ class GameScreen {
     this.level = new LevelView(this.model.state, this.model.getCurrentLevel(), this.header);
     this.confirmForm = new ConfirmView();
     this._timer = null;
+    console.log(this.model.state.time)
     this.bind(onNext, onBack);
   }
 
@@ -20,7 +21,10 @@ class GameScreen {
   }
 
   bind(onNext, onBack) {
-    this.exit = () => onBack();
+    this.exit = () => {
+      this.stopGame();
+      onBack();
+    };
     this.endGame = (state) => onNext(state);
   }
 
@@ -47,6 +51,10 @@ class GameScreen {
   // запуск таймера
   _tick() {
     if (!this.model.isTimeEnd()) {
+      if(this.model.state.time <= 5) {
+      console.log(this.model.state.time);
+      this.header.startBlink();
+    }
       this.model.tick();
       this.updateTime();
       this._timer = setTimeout(() => this._tick(), 1000);

@@ -38,7 +38,7 @@ export const getOptions = (level) => {
       <div class="game__option" data-key="${answer.image.url}" >
          <img src="${answer.image.url}" width="${answer.image.width}" height="${answer.image.height}">
          ${getLabels(level, i, answer.image.url)}
-         ${DEBUG ? `<span style="font-size: 18px; padding: 10px 0;">${answer.type}</span>` : ``}
+         ${DEBUG ? `<span style="font-size: 18px; text-align: center;">${answer.type}</span>` : ``}
       </div>`).join(``)}
    </form>`;
 };
