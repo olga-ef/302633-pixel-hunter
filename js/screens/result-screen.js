@@ -1,7 +1,7 @@
 import ResultView from '../views/result-view';
 import HeaderView from '../views/header-view';
 import ErrorModalView from '../views/modals/error-view';
-import {HEADER_SHORT} from '../data/config';
+import {HEADER_SHORT} from '../util/config';
 
 
 class ResultScreen {

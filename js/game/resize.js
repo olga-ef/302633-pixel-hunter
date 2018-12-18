@@ -7,7 +7,7 @@ export const resizeImage = (images) => {
       image.width = newSize.width;
       image.height = newSize.height;
     });
-  })
+  });
 };
 
 export const resize = (frame, given) => {

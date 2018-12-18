@@ -1,5 +1,4 @@
-import {LevelType} from '../data/config';
-import {resizeImage} from '../game/resize';
+import {LevelType} from '../util/config';
 const DEBUG = true;
 
 const getContentClass = (levelType) => {

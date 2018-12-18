@@ -4,7 +4,7 @@ import RulesScreen from './screens/rules-screen';
 import GameScreen from './screens/game-screen';
 import ResultScreen from './screens/result-screen';
 import GameModel from './model/game-model';
-import {changeScreen} from './util';
+import {changeScreen} from './util/util';
 import Loader from './game/loader';
 
 let gameData;
@@ -21,7 +21,7 @@ class Application {
       then((data) => setGameData(data)).
       then(() => {
         intro.addAnimation();
-        setTimeout(this.showWelcome(this.showRules.bind(this)), 5000);
+        setTimeout(() => this.showWelcome(this.showRules.bind(this)), 1500);
       }).
       catch(() => intro.showError);
   }

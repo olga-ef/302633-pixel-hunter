@@ -1,5 +1,5 @@
 import AbstractView from './abstract-view';
-import {HEADER_FULL} from '../data/config';
+import {HEADER_FULL} from '../util/config';
 
 class HeaderView extends AbstractView {
   constructor(type, state = ``) {

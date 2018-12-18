@@ -1,5 +1,5 @@
 import {assert} from 'chai';
-import adaptServerData from './adapter';
+import adaptServerData from '../game/adapter';
 
 const serverData = [
   {

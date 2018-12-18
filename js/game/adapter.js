@@ -1,4 +1,4 @@
-import {LevelType, AnswerType} from "../data/config";
+import {LevelType, AnswerType} from "../util/config";
 
 const preprocessData = (answers) => {
   const photos = answers.filter((answer) => answer.type === AnswerType.PHOTO);

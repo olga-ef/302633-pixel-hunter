@@ -1,7 +1,7 @@
 import AbstractView from './abstract-view';
 import {getStats} from './stats';
 import {getOptions} from './options';
-import {LevelType} from '../data/config';
+import {LevelType} from '../util/config';
 import {resizeImage} from '../game/resize';
 
 class LevelView extends AbstractView {

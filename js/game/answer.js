@@ -1,4 +1,4 @@
-import {LevelType, Result} from '../data/config';
+import {LevelType, Result} from '../util/config';
 const Time = {
   FAST: 20,
   SLOW: 10
