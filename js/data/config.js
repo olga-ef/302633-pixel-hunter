@@ -31,3 +31,7 @@ export const Result = {
   SLOW: `slow`,
   WRONG: `wrong`
 };
+
+export const DANGER_TIME = 5;
+
+export const ONE_SECOND = 1000;

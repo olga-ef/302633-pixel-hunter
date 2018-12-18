@@ -19,7 +19,10 @@ class Application {
     changeScreen(intro);
     Loader.loadData().
       then((data) => setGameData(data)).
-      then(() => this.showWelcome(this.showRules.bind(this))).
+      then(() => {
+        intro.addAnimation();
+        setTimeout(this.showWelcome(this.showRules.bind(this)), 5000);
+      }).
       catch(() => intro.showError);
   }
 
