@@ -21,6 +21,12 @@
   background-size: contain;
 }
 
+.greeting {
+  animation-name: fadeIn;
+  animation-duration:  3s;
+  animation-fill-mode: forwards;
+}
+
 .greeting__asterisk {
   margin-top: 50px;
   margin-bottom: 30px;
@@ -78,3 +84,4 @@
   right: 0;
   top: 0;
 }
+

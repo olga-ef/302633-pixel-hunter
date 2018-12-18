@@ -1,7 +1,8 @@
 import AbstractView from './abstract-view';
 import {getStats} from './stats';
 import {getOptions} from './options';
-import {LevelType} from '../data/config';
+import {LevelType} from '../util/config';
+import {resizeImage} from '../game/resize';
 
 class LevelView extends AbstractView {
   constructor(state, level, header) {
@@ -43,10 +44,13 @@ class LevelView extends AbstractView {
 
   bind() {
     const answersElement = this.element.querySelector(`.game__content`);
+    const images = Array.from(answersElement.querySelectorAll(`img`));
+    resizeImage(images);
     answersElement.addEventListener(`click`, (e) => {
       if (e.target.tagName === `INPUT` || this.level.type === LevelType.GAME_3) {
         const answers = this.getAnswers(this.level.type, e.target);
         this.onAnswer(answers, this.level);
+
         return;
       }
     });

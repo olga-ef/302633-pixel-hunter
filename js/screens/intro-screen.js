@@ -16,6 +16,10 @@ class IntroScreen {
     this.intro.onClick = onNext;
   }
 
+  addAnimation() {
+    this.intro.addAnimation();
+  }
+
   showError() {
     this.intro.element.appendChild(this.errorModal.element);
   }

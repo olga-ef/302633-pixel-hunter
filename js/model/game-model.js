@@ -1,4 +1,4 @@
-import {INITIAL_STATE} from '../data/config';
+import {INITIAL_STATE} from '../util/config';
 import {changeLevel} from '../game/level';
 import {decreaseLives} from '../game/lives';
 import {tick} from '../game/time';

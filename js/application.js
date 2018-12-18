@@ -4,7 +4,7 @@ import RulesScreen from './screens/rules-screen';
 import GameScreen from './screens/game-screen';
 import ResultScreen from './screens/result-screen';
 import GameModel from './model/game-model';
-import {changeScreen} from './util';
+import {changeScreen} from './util/util';
 import Loader from './game/loader';
 
 let gameData;
@@ -19,13 +19,16 @@ class Application {
     changeScreen(intro);
     Loader.loadData().
       then((data) => setGameData(data)).
-      then(() => this.showWelcome(this.showRules.bind(this))).
+      then(() => {
+        intro.addAnimation();
+        this.showWelcome(this.showRules.bind(this));
+      }).
       catch(() => intro.showError);
   }
 
   showWelcome() {
     const welcome = new WelcomeScreen(this.showRules.bind(this));
-    changeScreen(welcome);
+    changeScreen(welcome, true);
   }
 
   showRules() {

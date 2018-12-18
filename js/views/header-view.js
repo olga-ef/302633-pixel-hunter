@@ -1,5 +1,5 @@
 import AbstractView from './abstract-view';
-import {HEADER_FULL} from '../data/config';
+import {HEADER_FULL} from '../util/config';
 
 class HeaderView extends AbstractView {
   constructor(type, state = ``) {
@@ -48,6 +48,11 @@ class HeaderView extends AbstractView {
 
   updateTime(time) {
     this.timerElement.textContent = time;
+  }
+
+  startBlink() {
+    const timer = this.element.querySelector(`.game__timer`);
+    timer.classList.add(`game__timer--animated`);
   }
 
   bind() {

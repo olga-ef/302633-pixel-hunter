@@ -1,12 +1,12 @@
 import AbstractView from './abstract-view';
 import {getStats} from './stats';
-import {Point} from '../data/config';
+import {Point} from '../util/config';
 import calculateScore from '../game/score';
 
 class ResultView extends AbstractView {
   constructor(header) {
     super();
-    this. header = header.element;
+    this.header = header.element;
   }
 
   get template() {
@@ -21,7 +21,7 @@ class ResultView extends AbstractView {
   }
 
   winResult(score) {
-    return `<td class="result__points">${score.correct} × 100</td>
+    return `<td class="result__points">${score.correct} × ${Point.BASE}</td>
       <td class="result__total">${score.correct * Point.BASE}</td>`;
   }
 
@@ -40,7 +40,7 @@ class ResultView extends AbstractView {
       <td></td>
       <td class="result__extra">Бонус за скорость:</td>
       <td class="result__extra">${score.fast} <span class="stats__result stats__result--fast"></span></td>
-      <td class="result__points">× 50</td>
+      <td class="result__points">× ${Point.BONUS}</td>
       <td class="result__total">${score.fast * Point.BONUS}</td>
     </tr>`;
   }
@@ -50,7 +50,7 @@ class ResultView extends AbstractView {
         <td></td>
         <td class="result__extra">Бонус за жизни:</td>
         <td class="result__extra">${lives} <span class="stats__result stats__result--alive"></span></td>
-        <td class="result__points">× 50</td>
+        <td class="result__points">× ${Point.BONUS}</td>
         <td class="result__total">${lives * Point.BONUS}</td>
       </tr>`;
   }
@@ -60,7 +60,7 @@ class ResultView extends AbstractView {
       <td></td>
       <td class="result__extra">Штраф за медлительность:</td>
       <td class="result__extra">${score.slow} <span class="stats__result stats__result--slow"></span></td>
-      <td class="result__points">× 50</td>
+      <td class="result__points">× ${-Point.PENALTY}</td>
       <td class="result__total">${score.slow * -Point.PENALTY}</td>
     </tr>`;
   }

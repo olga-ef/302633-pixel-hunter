@@ -1,6 +1,6 @@
-import {changeScreen} from '../util';
+import {changeScreen} from '../util/util';
 import HeaderView from '../views/header-view';
-import {HEADER_FULL} from '../data/config';
+import {HEADER_FULL, DANGER_TIME, ONE_SECOND} from '../util/config';
 import LevelView from '../views/level-view';
 import {isAllAnswers, checkAnswer} from '../game/answer';
 import ConfirmView from '../views/modals/confirm-view';
@@ -20,7 +20,10 @@ class GameScreen {
   }
 
   bind(onNext, onBack) {
-    this.exit = () => onBack();
+    this.exit = () => {
+      this.stopGame();
+      onBack();
+    };
     this.endGame = (state) => onNext(state);
   }
 
@@ -47,9 +50,12 @@ class GameScreen {
   // запуск таймера
   _tick() {
     if (!this.model.isTimeEnd()) {
+      if (this.model.state.time <= DANGER_TIME) {
+        this.header.startBlink();
+      }
       this.model.tick();
       this.updateTime();
-      this._timer = setTimeout(() => this._tick(), 1000);
+      this._timer = setTimeout(() => this._tick(), ONE_SECOND);
       return;
     }
     this.stopGame();
