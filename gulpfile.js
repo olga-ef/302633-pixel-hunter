@@ -55,6 +55,7 @@ gulp.task(`scripts`, () => {
     pipe(plumber()).
     pipe(sourcemaps.init()).
     pipe(rollup({
+      cache: false,
       plugins: [
         resolve({browser: true}),
         commonjs(),

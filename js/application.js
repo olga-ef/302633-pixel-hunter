@@ -8,9 +8,27 @@ import {changeScreen} from './util/util';
 import Loader from './game/loader';
 
 let gameData;
+let images;
 
 const setGameData = (data) => {
   gameData = data;
+  return data;
+};
+
+const loadImage = (url) => {
+  return new Promise((onLoad, onError) => {
+    const image = new Image();
+    image.onload = () => onLoad(image);
+    image.onerror = () => onError(`не удалось загрузить изображение: ${url}`)
+    image.src = url;
+  });
+};
+
+const loadImages = (questions) => {
+  const images = [];
+  const answers = [].concat(...questions.map((question) => question.answers));
+  answers.forEach((answer) => images.push(loadImage(answer.image.url)));
+  return Promise.all(images);
 };
 
 class Application {
@@ -19,6 +37,10 @@ class Application {
     changeScreen(intro);
     Loader.loadData().
       then((data) => setGameData(data)).
+      then((data) => loadImages(data)).
+      then((loadedImages) => {
+        images = loadedImages;
+      }).
       then(() => {
         intro.addAnimation();
         this.showWelcome(true);
