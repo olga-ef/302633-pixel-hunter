@@ -22,6 +22,10 @@
 }
 
 .greeting {
+  position: absolute;
+  left: 50%;
+  top: 30px;
+  transform: translateX(-50%);
   animation-name: fadeIn;
   animation-duration:  3s;
   animation-fill-mode: forwards;

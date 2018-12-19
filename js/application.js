@@ -21,14 +21,18 @@ class Application {
       then((data) => setGameData(data)).
       then(() => {
         intro.addAnimation();
-        this.showWelcome(this.showRules.bind(this));
+        this.showWelcome(true);
       }).
       catch(() => intro.showError);
   }
 
-  showWelcome() {
+  showWelcome(isFade) {
     const welcome = new WelcomeScreen(this.showRules.bind(this));
-    changeScreen(welcome, true);
+    if (isFade) {
+      changeScreen(welcome, true);
+      return;
+    }
+    changeScreen(welcome);
   }
 
   showRules() {
