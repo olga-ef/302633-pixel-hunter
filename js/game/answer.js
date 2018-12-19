@@ -31,14 +31,6 @@ export const checkAnswer = (level, answers, time) => {
   return Result.CORRECT;
 };
 
-
-export const isAllAnswers = (answers, level) => {
-  if (level.type === LevelType.GAME_1) {
-    return answers.length === level.answers.length;
-  }
-  return true;
-};
-
 export const addAnswer = (state, answerStatus) => {
   const newState = Object.assign({}, state);
   newState.answers.push(answerStatus);

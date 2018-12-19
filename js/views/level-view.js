@@ -1,7 +1,5 @@
 import AbstractView from './abstract-view';
 import {getStats} from './stats';
-import {getOptions} from './options';
-import {LevelType} from '../util/config';
 import {resizeImage} from '../game/resize';
 
 class LevelView extends AbstractView {
@@ -15,7 +13,7 @@ class LevelView extends AbstractView {
   get template() {
     return `<section class="game">
       <p class="game__task">${this.level.question}</p>
-      ${getOptions(this.level)}
+      ${this.getOptions(this.level)}
       ${getStats(this.state.answers)}
     </section>`;
   }
@@ -24,22 +22,13 @@ class LevelView extends AbstractView {
     this.element.insertAdjacentElement(`afterbegin`, this.header);
   }
 
-  getAnswers(levelType, target) {
-    if (levelType === LevelType.GAME_3) {
-      let currentTarget = target;
-      while (!currentTarget.classList.contains(`game__option`)) {
-        currentTarget = currentTarget.parentElement;
-      }
-      return [currentTarget];
-    }
-    const answers = Array.from(this.element.querySelectorAll(`.game__option input`));
-    const checked = answers.filter((answer) => answer.checked);
+  getOptions() {
+  }
 
-    return checked;
+  getAnswers() {
   }
 
   onAnswer() {
-
   }
 
   bind() {
@@ -47,11 +36,9 @@ class LevelView extends AbstractView {
     const images = Array.from(answersElement.querySelectorAll(`img`));
     resizeImage(images);
     answersElement.addEventListener(`click`, (e) => {
-      if (e.target.tagName === `INPUT` || this.level.type === LevelType.GAME_3) {
-        const answers = this.getAnswers(this.level.type, e.target);
+      const answers = this.getAnswers(e);
+      if (answers) {
         this.onAnswer(answers, this.level);
-
-        return;
       }
     });
   }

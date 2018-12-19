@@ -1,6 +1,6 @@
 import {assert} from 'chai';
-import {tick} from '../game/time.js';
-import {INITIAL_STATE} from '../util/config.js';
+import {tick} from './js/game/time.js';
+import {INITIAL_STATE} from './js/util/config.js';
 
 describe(`Check live decreasing`, () => {
   it(`Should decrease time by 1`, () => {

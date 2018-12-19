@@ -8,7 +8,6 @@ import {changeScreen} from './util/util';
 import Loader from './game/loader';
 
 let gameData;
-let images;
 
 const setGameData = (data) => {
   gameData = data;
@@ -19,7 +18,7 @@ const loadImage = (url) => {
   return new Promise((onLoad, onError) => {
     const image = new Image();
     image.onload = () => onLoad(image);
-    image.onerror = () => onError(`не удалось загрузить изображение: ${url}`)
+    image.onerror = () => onError(`не удалось загрузить изображение: ${url}`);
     image.src = url;
   });
 };
@@ -38,9 +37,6 @@ class Application {
     Loader.loadData().
       then((data) => setGameData(data)).
       then((data) => loadImages(data)).
-      then((loadedImages) => {
-        images = loadedImages;
-      }).
       then(() => {
         intro.addAnimation();
         this.showWelcome(true);

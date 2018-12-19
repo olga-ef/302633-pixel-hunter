@@ -1,15 +1,16 @@
 import {changeScreen} from '../util/util';
 import HeaderView from '../views/header-view';
-import {HEADER_FULL, DANGER_TIME, ONE_SECOND} from '../util/config';
-import LevelView from '../views/level-view';
-import {isAllAnswers, checkAnswer} from '../game/answer';
+import {HEADER_FULL, DANGER_TIME, ONE_SECOND, LevelType} from '../util/config';
+import Level1View from '../views/level-1-view';
+import Level2View from '../views/level-2-view';
+import {checkAnswer} from '../game/answer';
 import ConfirmView from '../views/modals/confirm-view';
 
 class GameScreen {
   constructor(model, onNext, onBack) {
     this.model = model;
     this.header = new HeaderView(HEADER_FULL, this.model.state);
-    this.level = new LevelView(this.model.state, this.model.getCurrentLevel(), this.header);
+    this.level = this.getLevel(this.model.getCurrentLevel().type);
     this.confirmForm = new ConfirmView();
     this._timer = null;
     this.bind(onNext, onBack);
@@ -17,6 +18,13 @@ class GameScreen {
 
   get element() {
     return this.level.element;
+  }
+
+  getLevel(levelType) {
+    if (levelType === LevelType.GAME_3) {
+      return new Level2View(this.model.state, this.model.getCurrentLevel(), this.header);
+    }
+    return new Level1View(this.model.state, this.model.getCurrentLevel(), this.header);
   }
 
   bind(onNext, onBack) {
@@ -40,7 +48,7 @@ class GameScreen {
 
   // смена уровня
   changeLevel() {
-    const level = new LevelView(this.model.state, this.model.getCurrentLevel(), this.header);
+    const level = this.getLevel(this.model.getCurrentLevel().type);
     this.level = level;
     this.updateHeader();
     level.onAnswer = this.answer.bind(this);
@@ -87,9 +95,6 @@ class GameScreen {
 
   // обраотка ответа
   answer(answers, level) {
-    if (!isAllAnswers(answers, level)) {
-      return;
-    }
     this.stopGame();
     const answerStatus = checkAnswer(level, answers, this.model.state.time);
     this.model.addAnswer(answerStatus);

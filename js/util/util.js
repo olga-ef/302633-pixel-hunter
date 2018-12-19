@@ -7,7 +7,7 @@ export const render = (html = ``) => {
 const mainElement = document.querySelector(`#main`);
 
 export const changeScreen = (screen, isFade) => {
-  if(!isFade) {
+  if (!isFade) {
     mainElement.innerHTML = ``;
   }
   mainElement.appendChild(screen.element);
