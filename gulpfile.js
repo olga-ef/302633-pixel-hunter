@@ -51,7 +51,7 @@ gulp.task(`sprite`, () => {
 });
 
 gulp.task(`scripts`, () => {
-  return gulp.src(`js/**/*.js`).
+  return gulp.src([`js/**/*.js`, `!js/**/*test.js`]).
     pipe(plumber()).
     pipe(sourcemaps.init()).
     pipe(rollup({
@@ -131,7 +131,7 @@ gulp.task(`build`, [`assemble`], () => {
 
 gulp.task(`test`, () => {
   return gulp.
-  src([`tests/*.test.js`]).
+  src([`js/**/*.test.js`]).
   pipe(rollup({
     plugins: [
       commonjs()

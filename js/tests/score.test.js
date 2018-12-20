@@ -1,5 +1,5 @@
 import {assert} from 'chai';
-import calculateScore from './js/game/score.js';
+import calculateScore from '../game/score.js';
 
 const Result = {
   FIRST: [`correct`, `correct`, `correct`, `correct`, `correct`, `correct`, `wrong`, `wrong`, `wrong`, `wrong`],

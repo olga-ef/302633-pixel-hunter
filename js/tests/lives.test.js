@@ -1,6 +1,6 @@
 import {assert} from 'chai';
-import {decreaseLives} from './js/game/lives.js';
-import {INITIAL_STATE} from './js/util/config.js';
+import {decreaseLives} from '../game/lives.js';
+import {INITIAL_STATE} from '../util/config.js';
 
 describe(`Check live decreasing`, () => {
   it(`Should decrease lives by 1`, () => {
