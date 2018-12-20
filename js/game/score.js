@@ -1,4 +1,4 @@
-import {Point, Result} from '../data/config';
+import {Point, Result} from '../util/config';
 
 const ANSWERS_LIMIT = 7;
 

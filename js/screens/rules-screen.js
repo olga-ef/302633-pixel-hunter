@@ -1,5 +1,5 @@
 import RulesView from '../views/rules-view';
-import {HEADER_SHORT} from '../data/config';
+import {HEADER_SHORT} from '../util/config';
 import HeaderView from '../views/header-view';
 
 class RulesScreen {

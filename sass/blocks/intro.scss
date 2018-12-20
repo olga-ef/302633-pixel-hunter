@@ -3,9 +3,9 @@
  */
 
 .intro {
-  position: relative;
-  margin: 0 auto;
-
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,4 +38,9 @@
   position: absolute;
   right: 0;
   top: 0;
+}
+
+.intro--animated {
+  animation: fadeOut 3s ease;
+  animation-fill-mode: forwards;
 }

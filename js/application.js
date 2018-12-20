@@ -4,13 +4,30 @@ import RulesScreen from './screens/rules-screen';
 import GameScreen from './screens/game-screen';
 import ResultScreen from './screens/result-screen';
 import GameModel from './model/game-model';
-import {changeScreen} from './util';
+import {changeScreen} from './util/util';
 import Loader from './game/loader';
 
 let gameData;
 
 const setGameData = (data) => {
   gameData = data;
+  return data;
+};
+
+const loadImage = (url) => {
+  return new Promise((onLoad, onError) => {
+    const image = new Image();
+    image.onload = () => onLoad(image);
+    image.onerror = () => onError(`не удалось загрузить изображение: ${url}`);
+    image.src = url;
+  });
+};
+
+const loadImages = (questions) => {
+  const images = [];
+  const answers = [].concat(...questions.map((question) => question.answers));
+  answers.forEach((answer) => images.push(loadImage(answer.image.url)));
+  return Promise.all(images);
 };
 
 class Application {
@@ -19,12 +36,20 @@ class Application {
     changeScreen(intro);
     Loader.loadData().
       then((data) => setGameData(data)).
-      then(() => this.showWelcome(this.showRules.bind(this))).
+      then((data) => loadImages(data)).
+      then(() => {
+        intro.addAnimation();
+        this.showWelcome(true);
+      }).
       catch(() => intro.showError);
   }
 
-  showWelcome() {
+  showWelcome(isFade) {
     const welcome = new WelcomeScreen(this.showRules.bind(this));
+    if (isFade) {
+      changeScreen(welcome, true);
+      return;
+    }
     changeScreen(welcome);
   }
 

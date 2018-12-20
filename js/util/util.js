@@ -1,9 +1,3 @@
-export const getElementFromTemplate = (template) => {
-  const container = document.createElement(`div`);
-  container.innerHTML = template;
-  return container;
-};
-
 export const render = (html = ``) => {
   const container = document.createElement(`div`);
   container.innerHTML = html;
@@ -12,7 +6,9 @@ export const render = (html = ``) => {
 
 const mainElement = document.querySelector(`#main`);
 
-export const changeScreen = (screen) => {
-  mainElement.innerHTML = ``;
+export const changeScreen = (screen, isFade) => {
+  if (!isFade) {
+    mainElement.innerHTML = ``;
+  }
   mainElement.appendChild(screen.element);
 };

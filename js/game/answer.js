@@ -1,4 +1,4 @@
-import {LevelType, Result} from '../data/config';
+import {LevelType, Result} from '../util/config';
 const Time = {
   FAST: 20,
   SLOW: 10
@@ -29,14 +29,6 @@ export const checkAnswer = (level, answers, time) => {
   }
 
   return Result.CORRECT;
-};
-
-
-export const isAllAnswers = (answers, level) => {
-  if (level.type === LevelType.GAME_1) {
-    return answers.length === level.answers.length;
-  }
-  return true;
 };
 
 export const addAnswer = (state, answerStatus) => {
