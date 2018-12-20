@@ -9,7 +9,6 @@ class ResultScreen {
     this.state = state;
     this.header = new HeaderView(HEADER_SHORT);
     this.result = new ResultView(this.header);
-    this.errorModal = new ErrorModalView();
     this.bind(onBack);
   }
 
@@ -21,8 +20,9 @@ class ResultScreen {
     this.header.onClick = () => onBack();
   }
 
-  showError() {
-    this.result.element.appendChild(this.errorModal.element);
+  showError(error) {
+    const errorModal = new ErrorModalView(error);
+    this.result.element.appendChild(errorModal.element);
   }
 
   showScores(data) {

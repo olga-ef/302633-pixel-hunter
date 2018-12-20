@@ -1,5 +1,5 @@
 import LevelView from './level-view';
-const DEBUG = true;
+import {DEBUG} from '../util/settings';
 
 class Level2View extends LevelView {
   constructor(state, level, header) {
@@ -11,7 +11,7 @@ class Level2View extends LevelView {
     ${[...level.answers].map((answer) => `
       <div class="game__option" data-key="${answer.image.url}" >
          <img src="${answer.image.url}" width="${answer.image.width}" height="${answer.image.height}">
-         ${DEBUG ? `<span style="font-size: 18px; text-align: center;">${answer.type}</span>` : ``}
+         ${DEBUG ? `<span class="debug">${answer.type}</span>` : ``}
       </div>`).join(``)}
    </form>`;
   }

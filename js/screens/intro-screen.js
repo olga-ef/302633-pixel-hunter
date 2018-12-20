@@ -4,7 +4,6 @@ import ErrorModalView from '../views/modals/error-view';
 class IntroScreen {
   constructor(onNext) {
     this.intro = new IntroView();
-    this.errorModal = new ErrorModalView();
     this.bind(onNext);
   }
 
@@ -20,8 +19,9 @@ class IntroScreen {
     this.intro.addAnimation();
   }
 
-  showError() {
-    this.intro.element.appendChild(this.errorModal.element);
+  showError(error) {
+    const errorModal = new ErrorModalView(error);
+    this.intro.element.appendChild(errorModal.element);
   }
 }
 

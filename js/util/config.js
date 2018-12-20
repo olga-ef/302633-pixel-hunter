@@ -35,3 +35,8 @@ export const Result = {
 export const DANGER_TIME = 5;
 
 export const ONE_SECOND = 1000;
+
+export const Time = {
+  FAST: 20,
+  SLOW: 10
+};

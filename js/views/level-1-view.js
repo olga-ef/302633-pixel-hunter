@@ -1,7 +1,7 @@
 import LevelView from './level-view';
 import {LevelType} from '../util/config';
+import {DEBUG} from '../util/settings';
 
-const DEBUG = true;
 
 class Level1View extends LevelView {
   constructor(state, level, header) {
@@ -22,7 +22,7 @@ class Level1View extends LevelView {
           <input class="visually-hidden" name="question${i + 1}" type="radio" value="painting" data-key="${answer.image.url}">
           <span>Рисунок</span>
         </label>
-           ${DEBUG ? `<span style="font-size: 18px; text-align: center;">${answer.type}</span>` : ``}
+           ${DEBUG ? `<span class="debug">${answer.type}</span>` : ``}
       </div>`).join(``)}
    </form>`;
   }
