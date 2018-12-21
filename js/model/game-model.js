@@ -13,7 +13,6 @@ class GameModel {
     this.restart();
   }
 
-  // выводит текущее состояние
   get state() {
     return Object.freeze(this._state);
   }

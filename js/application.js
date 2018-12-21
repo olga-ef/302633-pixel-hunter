@@ -5,7 +5,7 @@ import GameScreen from './screens/game-screen';
 import ResultScreen from './screens/result-screen';
 import GameModel from './model/game-model';
 import {changeScreen} from './util/util';
-import Loader from './game/loader';
+import Loader from './data/loader';
 
 let gameData;
 
@@ -41,16 +41,12 @@ class Application {
         intro.addAnimation();
         this.showWelcome(true);
       }).
-      catch(() => intro.showError);
+      catch((error) => intro.showError(error));
   }
 
-  showWelcome(isFade) {
+  showWelcome(isFade = false) {
     const welcome = new WelcomeScreen(this.showRules.bind(this));
-    if (isFade) {
-      changeScreen(welcome, true);
-      return;
-    }
-    changeScreen(welcome);
+    changeScreen(welcome, isFade);
   }
 
   showRules() {

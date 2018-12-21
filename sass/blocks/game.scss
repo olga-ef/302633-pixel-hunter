@@ -134,6 +134,11 @@
 }
 
 @keyframes blink {
-  0% {opacity: 0;}
-  30% {opacity: 1;}
+  0% {
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 1;
+  }
 }

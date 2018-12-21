@@ -1,8 +1,4 @@
-import {LevelType, Result} from '../util/config';
-const Time = {
-  FAST: 20,
-  SLOW: 10
-};
+import {LevelType, Result, Time} from '../util/config';
 
 const isCorrect = (answers, level) => {
   const answerStatus = answers.every((answer) => {

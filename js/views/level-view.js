@@ -1,6 +1,6 @@
 import AbstractView from './abstract-view';
 import {getStats} from './stats';
-import {resizeImage} from '../game/resize';
+import {resizeImage} from '../data/resize';
 
 class LevelView extends AbstractView {
   constructor(state, level, header) {
@@ -23,12 +23,15 @@ class LevelView extends AbstractView {
   }
 
   getOptions() {
+
   }
 
   getAnswers() {
+
   }
 
   onAnswer() {
+
   }
 
   bind() {

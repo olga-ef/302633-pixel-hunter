@@ -8,7 +8,7 @@
     "stylelint": "stylelint 'sass/**/*.scss' --syntax scss",
     "build": "gulp build",
     "start": "gulp serve",
-    "test": "npm run eslint && gulp test"
+    "test": "npm run eslint && npm run stylelint && gulp test"
   },
   "devDependencies": {
     "@babel/core": "7.2.2",

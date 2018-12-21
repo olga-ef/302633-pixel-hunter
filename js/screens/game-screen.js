@@ -4,14 +4,14 @@ import {HEADER_FULL, DANGER_TIME, ONE_SECOND, LevelType} from '../util/config';
 import Level1View from '../views/level-1-view';
 import Level2View from '../views/level-2-view';
 import {checkAnswer} from '../game/answer';
-import ConfirmView from '../views/modals/confirm-view';
+import ConfirmViewModal from '../views/modals/confirm-view';
 
 class GameScreen {
   constructor(model, onNext, onBack) {
     this.model = model;
     this.header = new HeaderView(HEADER_FULL, this.model.state);
     this.level = this.getLevel(this.model.getCurrentLevel().type);
-    this.confirmForm = new ConfirmView();
+    this.confirmForm = new ConfirmViewModal();
     this._timer = null;
     this.bind(onNext, onBack);
   }
@@ -21,10 +21,8 @@ class GameScreen {
   }
 
   getLevel(levelType) {
-    if (levelType === LevelType.GAME_3) {
-      return new Level2View(this.model.state, this.model.getCurrentLevel(), this.header);
-    }
-    return new Level1View(this.model.state, this.model.getCurrentLevel(), this.header);
+    const LevelClass = (levelType === LevelType.GAME_3) ? Level2View : Level1View;
+    return new LevelClass(this.model.state, this.model.getCurrentLevel(), this.header);
   }
 
   bind(onNext, onBack) {
@@ -46,16 +44,14 @@ class GameScreen {
     this.header = header;
   }
 
-  // смена уровня
   changeLevel() {
     const level = this.getLevel(this.model.getCurrentLevel().type);
     this.level = level;
     this.updateHeader();
-    level.onAnswer = this.answer.bind(this);
+    level.onAnswer = this.onAnswer.bind(this);
     changeScreen(level);
   }
 
-  // запуск таймера
   _tick() {
     if (!this.model.isTimeEnd()) {
       if (this.model.state.time <= DANGER_TIME) {
@@ -72,7 +68,6 @@ class GameScreen {
     this.endLevel(!this.model.isDead());
   }
 
-  // запуск игры
   startGame() {
     this.changeLevel();
     this._tick();
@@ -82,7 +77,6 @@ class GameScreen {
     clearInterval(this._timer);
   }
 
-  // закончить уровень
   endLevel() {
     if (!this.model.isDead() && this.model.isNextLevel()) {
       this.model.nextLevel();
@@ -93,8 +87,7 @@ class GameScreen {
     this.endGame(this.model);
   }
 
-  // обраотка ответа
-  answer(answers, level) {
+  onAnswer(answers, level) {
     this.stopGame();
     const answerStatus = checkAnswer(level, answers, this.model.state.time);
     this.model.addAnswer(answerStatus);
@@ -113,10 +106,6 @@ class GameScreen {
     form.onConfirm = () => this.exit();
     form.onCancel = () => this.removeModal(this.level.element, this.confirmForm.element);
     this.level.element.appendChild(this.confirmForm.element);
-  }
-
-  endGame() {
-
   }
 }
 
