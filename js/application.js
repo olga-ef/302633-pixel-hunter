@@ -51,7 +51,7 @@ class Application {
 
   static showGame(playerName) {
     const gameScreen = new GameScreen(new GameModel(gameData, playerName), Application.showResult,
-        Application.showWelcome.bind(this));
+        Application.showWelcome);
     gameScreen.startGame();
   }
 
