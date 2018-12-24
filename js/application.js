@@ -32,10 +32,10 @@ class Application {
     try {
       gameData = await Loader.loadData();
       await loadImages(gameData);
-      document.querySelector(`.intro__asterisk`).style.color = `red`;
-      intro.intro.onClick = () => Application.showWelcome(true);
+      intro.activateButton(Application.showWelcome);
       intro.addAnimation();
       Application.showWelcome(true);
+
     } catch (error) {
       intro.showError(error);
     }

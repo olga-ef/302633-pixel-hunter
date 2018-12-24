@@ -16,6 +16,10 @@ class IntroView extends AbstractView {
 
   }
 
+  changeButtonColor() {
+    this.element.querySelector(`.intro__asterisk`).style.color = `red`;
+  }
+
   addAnimation() {
     const introElement = this.element.querySelector(`.intro`);
     introElement.classList.add(`intro--animated`);

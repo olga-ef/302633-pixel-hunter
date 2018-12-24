@@ -2,12 +2,17 @@ import IntroView from '../views/intro-view';
 import ErrorModalView from '../views/modals/error-view';
 
 class IntroScreen {
-  constructor() {
+  constructor(onNext) {
     this.intro = new IntroView();
   }
 
   get element() {
     return this.intro.element;
+  }
+
+  activateButton(onNext) {
+    this.intro.changeButtonColor();
+    this.intro.onClick = onNext(true);
   }
 
   addAnimation() {
