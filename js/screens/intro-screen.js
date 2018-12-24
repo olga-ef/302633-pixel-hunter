@@ -2,7 +2,7 @@ import IntroView from '../views/intro-view';
 import ErrorModalView from '../views/modals/error-view';
 
 class IntroScreen {
-  constructor(onNext) {
+  constructor() {
     this.intro = new IntroView();
   }
 
