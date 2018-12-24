@@ -1,7 +1,7 @@
 import ResultView from '../views/result-view';
 import HeaderView from '../views/header-view';
 import ErrorModalView from '../views/modals/error-view';
-import {HEADER_SHORT} from '../util/config';
+import {HEADER_SHORT, ANSWERS_LIMIT, Result} from '../util/config';
 
 
 class ResultScreen {
@@ -9,6 +9,7 @@ class ResultScreen {
     this.state = state;
     this.header = new HeaderView(HEADER_SHORT);
     this.result = new ResultView(this.header);
+    this.win = this.isWin();
     this.bind(onBack);
   }
 
@@ -18,6 +19,10 @@ class ResultScreen {
 
   bind(onBack) {
     this.header.onClick = () => onBack();
+  }
+  isWin() {
+    const rightAnswers = this.state.answers.filter((answer) => answer !== Result.WRONG);
+    return rightAnswers.length >= ANSWERS_LIMIT;
   }
 
   showError(error) {

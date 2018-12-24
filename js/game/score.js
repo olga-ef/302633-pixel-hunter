@@ -1,6 +1,4 @@
-import {Point, Result} from '../util/config';
-
-const ANSWERS_LIMIT = 7;
+import {Point, Result, ANSWERS_LIMIT} from '../util/config';
 
 const getFinalScore = (rightAnswers, fastAnswers, slowAnswers, lives) => {
 

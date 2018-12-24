@@ -40,3 +40,5 @@ export const Time = {
   FAST: 20,
   SLOW: 10
 };
+
+export const ANSWERS_LIMIT = 7;

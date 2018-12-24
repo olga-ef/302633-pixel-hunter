@@ -9,11 +9,6 @@ import Loader from './data/loader';
 
 let gameData;
 
-const setGameData = (data) => {
-  gameData = data;
-  return data;
-};
-
 const loadImage = (url) => {
   return new Promise((onLoad, onError) => {
     const image = new Image();
@@ -31,43 +26,50 @@ const loadImages = (questions) => {
 };
 
 class Application {
-  showIntro() {
-    const intro = new IntroScreen(this.showWelcome.bind(this));
+  static async showIntro() {
+    const intro = new IntroScreen(Application.showWelcome);
     changeScreen(intro);
-    Loader.loadData().
-      then((data) => setGameData(data)).
-      then((data) => loadImages(data)).
-      then(() => {
-        intro.addAnimation();
-        this.showWelcome(true);
-      }).
-      catch((error) => intro.showError(error));
+    try {
+      gameData = await Loader.loadData();
+      await loadImages(gameData);
+      intro.addAnimation();
+      Application.showWelcome(true);
+    } catch (error) {
+      intro.showError(error);
+    }
   }
 
-  showWelcome(isFade = false) {
-    const welcome = new WelcomeScreen(this.showRules.bind(this));
+  static showWelcome(isFade = false) {
+    const welcome = new WelcomeScreen(Application.showRules);
     changeScreen(welcome, isFade);
   }
 
-  showRules() {
-    const rulesScreen = new RulesScreen(this.showGame.bind(this), this.showWelcome.bind(this));
+  static showRules() {
+    const rulesScreen = new RulesScreen(Application.showGame, Application.showWelcome);
     changeScreen(rulesScreen);
   }
 
-  showGame(playerName) {
-    const gameScreen = new GameScreen(new GameModel(gameData, playerName), this.showResult.bind(this),
-        this.showWelcome.bind(this));
+  static showGame(playerName) {
+    const gameScreen = new GameScreen(new GameModel(gameData, playerName), Application.showResult,
+        Application.showWelcome.bind(this));
     gameScreen.startGame();
   }
 
-  showResult(model) {
+  static async showResult(model) {
     const playerName = model.playerName;
-    const result = new ResultScreen(model.state, this.showWelcome.bind(this));
+    const result = new ResultScreen(model.state, Application.showWelcome);
     changeScreen(result);
-    Loader.saveResult(model.state.answers, model.state.lives, playerName).
-      then(() => Loader.loadResults(playerName)).
-      then((data) => result.showScores(data)).
-      catch(() => result.showError());
+    try {
+      await Loader.saveResult(model.state.answers, model.state.lives, playerName);
+      result.showScores(await Loader.loadResults(playerName));
+
+      if (result.win) {
+        gameData = await Loader.loadData();
+        await loadImages(gameData);
+      }
+    } catch (error) {
+      result.showError(error);
+    }
   }
 }
 

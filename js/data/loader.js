@@ -20,24 +20,20 @@ const checkStatus = (response) => {
 const toJSON = (res) => res.json();
 
 class Loader {
-  static loadData() {
-    return (
-      fetch(`${SERVER_URL}/questions`).
-        then(checkStatus).
-        then(toJSON).
-        then(adaptServerData)
-    );
+  static async loadData() {
+    const response = await fetch(`${SERVER_URL}/questions`);
+    const checkedResponse = checkStatus(response);
+    const responseData = await toJSON(checkedResponse);
+    return adaptServerData(responseData);
   }
 
-  static loadResults(userName = DEFAULT_NAME) {
-    return (
-      fetch(`${SERVER_URL}/stats/:${APP_ID}-:${userName}`).
-        then(checkStatus).
-        then(toJSON)
-    );
+  static async loadResults(userName = DEFAULT_NAME) {
+    const response = await fetch(`${SERVER_URL}/stats/:${APP_ID}-:${userName}`);
+    const checkedResponse = checkStatus(response);
+    return await toJSON(checkedResponse);
   }
 
-  static saveResult(stats, lives, userName) {
+  static async saveResult(stats, lives, userName) {
     const data = {stats, lives};
     const requestSettings = {
       body: JSON.stringify(data),
@@ -46,8 +42,9 @@ class Loader {
       },
       method: `POST`
     };
+    const response = await fetch(`${SERVER_URL}/stats/:${APP_ID}-:${userName}`, requestSettings);
 
-    return fetch(`${SERVER_URL}/stats/:${APP_ID}-:${userName}`, requestSettings).then(checkStatus);
+    return checkStatus(response);
   }
 }
 
