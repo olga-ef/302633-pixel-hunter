@@ -27,11 +27,13 @@ const loadImages = (questions) => {
 
 class Application {
   static async showIntro() {
-    const intro = new IntroScreen(Application.showWelcome);
+    const intro = new IntroScreen();
     changeScreen(intro);
     try {
       gameData = await Loader.loadData();
       await loadImages(gameData);
+      document.querySelector(`.intro__asterisk`).style.color = `red`;
+      intro.intro.onClick = () => Application.showWelcome(true);
       intro.addAnimation();
       Application.showWelcome(true);
     } catch (error) {
